@@ -53,7 +53,7 @@ export function fetchLogin(login, password, history) {
   return (dispatch) => {
     dispatch(requestLogin());
 
-    fetch(`http://localhost:8124/selfcare/j_security_check/ru?j_username=${login}&j_password=${password}`)
+    fetch(`https://rzd-proxy.herokuapp.com/selfcare/j_security_check/ru?j_username=${login}&j_password=${password}`)
       .then(
         function (res) {
 
@@ -70,7 +70,7 @@ export function fetchLogin(login, password, history) {
         function (res) {
           var lToken = res.token
 
-          fetch(`http://localhost:8124/selfcare/user?token=${res.token}`)
+          fetch(`https://rzd-proxy.herokuapp.com/selfcare/user?token=${res.token}`)
             .then(
               function (res) {
 
