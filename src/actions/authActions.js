@@ -77,6 +77,7 @@ export function fetchLogout(history) {
       .catch (
         err => { 
           dispatch(requestLogoutError(err)) 
+          history.push("/login")
         }
       )
   }

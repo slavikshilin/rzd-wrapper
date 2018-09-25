@@ -37,13 +37,10 @@ class LoginPage extends Component {
 
     if (page.isFetching) {
       return (
-        <Layout style={{height:"100vh"}}> 
-          <Splash />
-        </Layout>
-        )
+        <Splash />
+      )
     } else {
       return (
-        <Layout style={{height:"100vh"}}> 
         <Layout align="middle">
           <Footer style={{ fontSize: "x-large" }}>
             <AlertMessage err={page.err}/>
@@ -52,8 +49,6 @@ class LoginPage extends Component {
           <Content><WrappedLogin err={page.err} history={history} onSubmitBtn={(login, password, history) => fetchLoginAction(login, password, history)}/></Content>
           <Footer></Footer>
         </Layout>
-        <Footer id="footer">© Вячеслав Шилин</Footer>
-      </Layout> 
       )      
     }
   }

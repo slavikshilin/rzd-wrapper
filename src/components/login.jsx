@@ -16,20 +16,28 @@ class Login extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
-      if (!err) {    
+      if (!err) {
         const { onSubmitBtn, history } = this.props;
         onSubmitBtn(values.userName, values.password, history);
-        
+
         console.log('Received values of form: ', values);
       }
     });
   }
 
-  handleConfirmPassword = (rule, value, callback) => {
-    //const { getFieldValue } = this.props.form
+  handleConfirmLogin = (rule, value, callback) => {
 
     if (value && (value.length < 3 || value.length > 20)) {
-        callback('Пароль должен быть не менее 3-х и не более 20-ти символов!')
+      callback('Логин должен быть не менее 3-х и не более 20-ти символов!')
+    }
+
+    callback()
+  }
+
+  handleConfirmPassword = (rule, value, callback) => {
+
+    if (value && (value.length < 3 || value.length > 20)) {
+      callback('Пароль должен быть не менее 3-х и не более 20-ти символов!')
     }
 
     callback()
@@ -48,7 +56,9 @@ class Login extends React.Component {
           help={userNameError || ''}
         >
           {getFieldDecorator('userName', {
-            rules: [{ required: true, message: 'Введите логин!' }],
+            rules: [
+              { required: true, message: 'Введите логин!' },
+              { validator: this.handleConfirmLogin }],
           })(
             <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Логин" maxLength="20" />
           )}
@@ -59,8 +69,8 @@ class Login extends React.Component {
         >
           {getFieldDecorator('password', {
             rules: [
-            { required: true, message: 'Введите пароль!' }, 
-            { validator: this.handleConfirmPassword }],
+              { required: true, message: 'Введите пароль!' },
+              { validator: this.handleConfirmPassword }],
           })(
             <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Пароль" maxLength="20" />
           )}
