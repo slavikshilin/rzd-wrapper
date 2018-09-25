@@ -55,7 +55,7 @@ export function fetchLogout(history) {
     localStorage.clear()
     dispatch(requestLogout());
 
-    fetch(`http://localhost:4000/selfcare/ibm_security_logout?logoutExitPage=http://m.rzd.ru&token=${token}`)
+    fetch(`https://rzd-proxy.herokuapp.com/selfcare/ibm_security_logout?logoutExitPage=http://m.rzd.ru&token=${token}`)
       .then(
         function (res) {
           if (res.ok) {
@@ -87,7 +87,7 @@ export function fetchLogin(login, password, history) {
   return (dispatch) => {
     dispatch(requestLogin());
 
-    fetch(`http://localhost:4000/selfcare/j_security_check/ru?j_username=${login}&j_password=${password}`)
+    fetch(`https://rzd-proxy.herokuapp.com/selfcare/j_security_check/ru?j_username=${login}&j_password=${password}`)
       .then(
         function (res) {
 
@@ -109,7 +109,7 @@ export function fetchLogin(login, password, history) {
 
           var lToken = res.token
 
-          fetch(`http://localhost:4000/selfcare/user?token=${lToken}`)
+          fetch(`https://rzd-proxy.herokuapp.com/selfcare/user?token=${lToken}`)
             .then(
               function (res) {
 
