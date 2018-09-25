@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Layout, Button } from 'antd';
 
 const { Content, Footer } = Layout;
-class HomeForm extends Component {
+class Home extends Component {
 
   render() {
     const { page, history, fetchLogoutAction } = this.props
@@ -32,4 +32,4 @@ class HomeForm extends Component {
   }
 }
 
-export default HomeForm
+export default Home

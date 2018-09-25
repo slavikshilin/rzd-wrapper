@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { Layout, Alert } from 'antd';
-import SplashForm from '../components/splashScreen'
-import WrappedLoginForm from '../components/loginForm'
-import { fetchLogin } from '../actions/loginActions'
+import Splash from '../components/splash'
+import WrappedLogin from '../components/login'
+import { fetchLogin } from '../actions/authActions'
 
 const { Content, Footer } = Layout;
 
@@ -29,7 +29,7 @@ function AlertMessage(props) {
   } 
 }
 
-class Login extends Component {
+class LoginPage extends Component {
  
   render() {
     localStorage.clear()
@@ -38,7 +38,7 @@ class Login extends Component {
     if (page.isFetching) {
       return (
         <Layout style={{height:"100vh"}}> 
-          <SplashForm />
+          <Splash />
         </Layout>
         )
     } else {
@@ -49,7 +49,7 @@ class Login extends Component {
             <AlertMessage err={page.err}/>
             Авторизация на сайте
           </Footer>
-          <Content><WrappedLoginForm err={page.err} history={history} onSubmitBtn={(login, password, history) => fetchLoginAction(login, password, history)}/></Content>
+          <Content><WrappedLogin err={page.err} history={history} onSubmitBtn={(login, password, history) => fetchLoginAction(login, password, history)}/></Content>
           <Footer></Footer>
         </Layout>
         <Footer id="footer">© Вячеслав Шилин</Footer>
@@ -74,4 +74,4 @@ const mapDispatchToProps = dispatch => {
 export default withRouter(connect(
   mapStateToProps,
   mapDispatchToProps
-)(Login))
+)(LoginPage))

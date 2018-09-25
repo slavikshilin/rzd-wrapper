@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { Layout } from 'antd';
-import { fetchLogout } from '../actions/loginActions'
-import HomeForm from '../components/homeForm'
-import SplashForm from '../components/splashScreen'
+import { fetchLogout } from '../actions/authActions'
+import Home from '../components/home'
+import Splash from '../components/splash'
 
-class Home extends Component {
+class HomePage extends Component {
 
   render() {
 
@@ -15,13 +15,13 @@ class Home extends Component {
     if (page.isFetching) {
       return (
         <Layout style={{height:"100vh"}}> 
-          <SplashForm />
+          <Splash />
         </Layout>
         )
     } else {
       return (
         <Layout style={{height:"100vh"}}>
-          <HomeForm page={page} history={history} fetchLogoutAction={fetchLogoutAction} />
+          <Home page={page} history={history} fetchLogoutAction={fetchLogoutAction} />
         </Layout>          
       )      
     }
@@ -43,4 +43,4 @@ const mapDispatchToProps = dispatch => {
 export default withRouter(connect(
   mapStateToProps,
   mapDispatchToProps
-)(Home))
+)(HomePage))

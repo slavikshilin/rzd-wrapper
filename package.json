@@ -21,6 +21,7 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
+    "cross-env": "^5.2.0",
     "redux-logger": "^3.0.6"
   }
 }

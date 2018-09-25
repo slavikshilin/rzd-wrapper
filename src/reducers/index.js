@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
-import { loginReducer } from './loginReducer'
+import { authReducer } from './authReducer'
 
 export const rootReducer = combineReducers({
-  page: loginReducer
+  page: authReducer
 })

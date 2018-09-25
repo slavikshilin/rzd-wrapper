@@ -1,5 +1,5 @@
 import { REQUEST_LOGIN, REQUEST_LOGIN_SUCCESS, REQUEST_LOGIN_FAILED,
-         REQUEST_LOGOUT, REQUEST_LOGOUT_SUCCESS, REQUEST_LOGOUT_FAILED } from '../actions/loginActions'
+         REQUEST_LOGOUT, REQUEST_LOGOUT_SUCCESS, REQUEST_LOGOUT_FAILED } from '../actions/authActions'
 
 const initialState = {
   userInfo: null,
@@ -7,7 +7,7 @@ const initialState = {
   isFetching: false,  
 }
 
-export function loginReducer(state = initialState, action) {
+export function authReducer(state = initialState, action) {
   switch (action.type) {
 
     case REQUEST_LOGIN:

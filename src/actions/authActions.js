@@ -1,5 +1,3 @@
-//import axios from 'axios';
-
 export const REQUEST_LOGIN = 'REQUEST_LOGIN'
 export const REQUEST_LOGIN_SUCCESS = 'REQUEST_LOGIN_SUCCESS'
 export const REQUEST_LOGIN_FAILED = 'REQUEST_LOGIN_FAILED'
@@ -55,7 +53,7 @@ export function fetchLogout(history) {
     localStorage.clear()
     dispatch(requestLogout());
 
-    fetch(`https://rzd-proxy.herokuapp.com/selfcare/ibm_security_logout?logoutExitPage=http://m.rzd.ru&token=${token}`)
+    fetch(`http://localhost:4000/selfcare/ibm_security_logout?logoutExitPage=http://m.rzd.ru&token=${token}`)
       .then(
         function (res) {
           if (res.ok) {
@@ -87,7 +85,7 @@ export function fetchLogin(login, password, history) {
   return (dispatch) => {
     dispatch(requestLogin());
 
-    fetch(`https://rzd-proxy.herokuapp.com/selfcare/j_security_check/ru?j_username=${login}&j_password=${password}`)
+    fetch(`http://localhost:4000/selfcare/j_security_check/ru?j_username=${login}&j_password=${password}`)
       .then(
         function (res) {
 
@@ -109,7 +107,7 @@ export function fetchLogin(login, password, history) {
 
           var lToken = res.token
 
-          fetch(`https://rzd-proxy.herokuapp.com/selfcare/user?token=${lToken}`)
+          fetch(`http://localhost:4000/selfcare/user?token=${lToken}`)
             .then(
               function (res) {
 

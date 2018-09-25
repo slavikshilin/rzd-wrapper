@@ -3,7 +3,7 @@ import { Spin, Layout } from 'antd';
 
 const { Content, Footer } = Layout;
 
-class SplashForm extends Component {
+class Splash extends Component {
 
     render() {
         return (
@@ -22,4 +22,4 @@ class SplashForm extends Component {
     }
 }
 
-export default SplashForm
+export default Splash
