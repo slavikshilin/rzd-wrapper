@@ -6,6 +6,8 @@ export const REQUEST_LOGOUT = 'REQUEST_LOGOUT'
 export const REQUEST_LOGOUT_SUCCESS = 'REQUEST_LOGOUT_SUCCESS'
 export const REQUEST_LOGOUT_FAILED = 'REQUEST_LOGOUT_FAILED'
 
+const HOST_URL = (process.env.NODE_ENV === 'development') ? 'http://localhost:4000' : 'https://rzd-proxy.herokuapp.com'
+
 
 function requestLogin() {
   return {
@@ -53,7 +55,7 @@ export function fetchLogout(history) {
     localStorage.clear()
     dispatch(requestLogout());
 
-    fetch(`http://localhost:4000/selfcare/ibm_security_logout?logoutExitPage=http://m.rzd.ru&token=${token}`)
+    fetch(`${HOST_URL}/selfcare/ibm_security_logout?logoutExitPage=http://m.rzd.ru&token=${token}`)
       .then(
         function (res) {
           if (res.ok) {
@@ -85,7 +87,7 @@ export function fetchLogin(login, password, history) {
   return (dispatch) => {
     dispatch(requestLogin());
 
-    fetch(`http://localhost:4000/selfcare/j_security_check/ru?j_username=${login}&j_password=${password}`)
+    fetch(`${HOST_URL}/selfcare/j_security_check/ru?j_username=${login}&j_password=${password}`)
       .then(
         function (res) {
 
@@ -107,7 +109,7 @@ export function fetchLogin(login, password, history) {
 
           var lToken = res.token
 
-          fetch(`http://localhost:4000/selfcare/user?token=${lToken}`)
+          fetch(`${HOST_URL}/selfcare/user?token=${lToken}`)
             .then(
               function (res) {
 
