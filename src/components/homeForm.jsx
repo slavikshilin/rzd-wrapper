@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Layout, Button } from 'antd';
-import 'antd/dist/antd.css';
 
 const { Content, Footer } = Layout;
 class HomeForm extends Component {

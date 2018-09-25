@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
+import { Layout } from 'antd';
 import { fetchLogout } from '../actions/loginActions'
 import HomeForm from '../components/homeForm'
 import SplashForm from '../components/splashScreen'
-import 'antd/dist/antd.css';
 
 class Home extends Component {
 
@@ -14,11 +14,15 @@ class Home extends Component {
 
     if (page.isFetching) {
       return (
-        <SplashForm />
+        <Layout style={{height:"100vh"}}> 
+          <SplashForm />
+        </Layout>
         )
     } else {
       return (
-        <HomeForm page={page} history={history} fetchLogoutAction={fetchLogoutAction} />
+        <Layout style={{height:"100vh"}}>
+          <HomeForm page={page} history={history} fetchLogoutAction={fetchLogoutAction} />
+        </Layout>          
       )      
     }
   }

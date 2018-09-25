@@ -5,7 +5,6 @@ import { Layout, Alert } from 'antd';
 import SplashForm from '../components/splashScreen'
 import WrappedLoginForm from '../components/loginForm'
 import { fetchLogin } from '../actions/loginActions'
-import 'antd/dist/antd.css';
 
 const { Content, Footer } = Layout;
 
@@ -38,11 +37,13 @@ class Login extends Component {
 
     if (page.isFetching) {
       return (
-        <SplashForm />
+        <Layout style={{height:"100vh"}}> 
+          <SplashForm />
+        </Layout>
         )
     } else {
       return (
-        <Layout> 
+        <Layout style={{height:"100vh"}}> 
         <Layout align="middle">
           <Footer style={{ fontSize: "x-large" }}>
             <AlertMessage err={page.err}/>

@@ -7,6 +7,7 @@ import './index.css';
 import Login from './pages/login';
 import Home from './pages/home';
 import registerServiceWorker from './registerServiceWorker';
+import 'antd/dist/antd.css';
 
 function isLoggedIn() {
     return localStorage.getItem('cks_token') !== null
