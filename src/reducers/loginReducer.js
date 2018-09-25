@@ -1,4 +1,5 @@
-import { LOGIN_FAILED, REQUEST_LOGIN, REQUEST_LOGIN_SUCCESS, REQUEST_LOGIN_FAILED } from '../actions/loginActions'
+import { REQUEST_LOGIN, REQUEST_LOGIN_SUCCESS, REQUEST_LOGIN_FAILED,
+         REQUEST_LOGOUT, REQUEST_LOGOUT_SUCCESS, REQUEST_LOGOUT_FAILED } from '../actions/loginActions'
 
 const initialState = {
   userInfo: null,
@@ -9,12 +10,6 @@ const initialState = {
 export function loginReducer(state = initialState, action) {
   switch (action.type) {
 
-    case LOGIN_FAILED:
-    {
-      let newState = { ...state, userInfo: null, err: action.payload };
-      return newState;
-    }      
-      
     case REQUEST_LOGIN:
     {
       let newState = { ...state, userInfo: null, err: null, isFetching: true };
@@ -28,6 +23,24 @@ export function loginReducer(state = initialState, action) {
     }    
     
     case REQUEST_LOGIN_FAILED:
+    {
+      let newState = { ...state, userInfo: null, err: action.payload, isFetching: false };
+      return newState;
+    }  
+    
+    case REQUEST_LOGOUT:
+    {
+      let newState = { ...state, userInfo: null, err: null, isFetching: true };
+      return newState;
+    }   
+
+    case REQUEST_LOGOUT_SUCCESS:
+    {
+      let newState = { ...state, userInfo: null, err: null, isFetching: false };
+      return newState;
+    }    
+    
+    case REQUEST_LOGOUT_FAILED:
     {
       let newState = { ...state, userInfo: null, err: action.payload, isFetching: false };
       return newState;

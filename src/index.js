@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux'
-import { Route, BrowserRouter } from 'react-router-dom'
+import { Route, BrowserRouter, Switch, Redirect } from 'react-router-dom'
 import { store } from './store/configureStore'
 import './index.css';
 import Login from './pages/login';
@@ -15,13 +15,16 @@ function isLoggedIn() {
 ReactDOM.render(
     <Provider store={store}>
         <BrowserRouter>
-            <Route exact path='/' render={() => (
-                isLoggedIn() ? (
-                    <Home to="/"/>
-                ) : (
-                    <Login />
-                )
-            )}/>
+            <Switch>
+                <Route exact path='/' render={() => (
+                    isLoggedIn() ? (
+                        <Home to="/"/>
+                    ) : (
+                        <Redirect to="/login" push={true} />
+                    )
+                )}/>
+                <Route path='/login' component={Login}/>
+            </Switch>            
         </BrowserRouter>
     </Provider>,
     document.getElementById('root'));

@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { Layout, Alert } from 'antd';
+import SplashForm from '../components/splashScreen'
 import WrappedLoginForm from '../components/loginForm'
-import { checkLogin, fetchLogin } from '../actions/loginActions'
+import { fetchLogin } from '../actions/loginActions'
 import 'antd/dist/antd.css';
 
 const { Content, Footer } = Layout;
@@ -32,21 +33,28 @@ function AlertMessage(props) {
 class Login extends Component {
  
   render() {
-    const { page, fetchLoginAction } = this.props
+    localStorage.clear()
+    const { page, fetchLoginAction, history } = this.props
 
-    return (
-      <Layout> 
+    if (page.isFetching) {
+      return (
+        <SplashForm />
+        )
+    } else {
+      return (
+        <Layout> 
         <Layout align="middle">
           <Footer style={{ fontSize: "x-large" }}>
             <AlertMessage err={page.err}/>
             Авторизация на сайте
           </Footer>
-          <Content><WrappedLoginForm err={page.err} history={this.props.history} onSubmitBtn={(login, password, history) => fetchLoginAction(login, password, history)}/></Content>
+          <Content><WrappedLoginForm err={page.err} history={history} onSubmitBtn={(login, password, history) => fetchLoginAction(login, password, history)}/></Content>
           <Footer></Footer>
         </Layout>
         <Footer id="footer">© Вячеслав Шилин</Footer>
       </Layout> 
-    );
+      )      
+    }
   }
 }
 
@@ -58,7 +66,6 @@ const mapStateToProps = store => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    checkLoginAction: (login, password, history) => dispatch(checkLogin(login, password, history)),
     fetchLoginAction: (login, password, history) => dispatch(fetchLogin(login, password, history)),
   }
 }

@@ -29,7 +29,7 @@ class LoginForm extends React.Component {
     //const { getFieldValue } = this.props.form
 
     if (value && (value.length < 3 || value.length > 20)) {
-        callback('Пароль должен быть не менее 6-ти и не более 20-ти символов!')
+        callback('Пароль должен быть не менее 3-х и не более 20-ти символов!')
     }
 
     callback()

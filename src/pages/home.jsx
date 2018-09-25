@@ -1,27 +1,26 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-import { Layout } from 'antd';
+import { fetchLogout } from '../actions/loginActions'
+import HomeForm from '../components/homeForm'
+import SplashForm from '../components/splashScreen'
 import 'antd/dist/antd.css';
 
-const { Content, Footer } = Layout;
 class Home extends Component {
- 
-  render() {
-    const { page } = this.props
 
-    return (
-        <Layout> 
-        <Layout align="middle">
-            <Footer style={{ fontSize: "x-large" }}>
-                Домашняя страница
-            </Footer>
-            <Content>Поздравляю {page.userInfo.cn}, вы авторизованы!</Content>
-            <Footer></Footer>
-        </Layout>
-        <Footer id="footer">© Вячеслав Шилин</Footer>
-        </Layout> 
-    );
+  render() {
+
+    const { page, history, fetchLogoutAction } = this.props
+
+    if (page.isFetching) {
+      return (
+        <SplashForm />
+        )
+    } else {
+      return (
+        <HomeForm page={page} history={history} fetchLogoutAction={fetchLogoutAction} />
+      )      
+    }
   }
 }
 
@@ -29,8 +28,15 @@ const mapStateToProps = store => {
     return {
       page: store.page,
     }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchLogoutAction: (history) => dispatch(fetchLogout(history)),
   }
+}
   
-  export default withRouter(connect(
-    mapStateToProps
-  )(Home))
+export default withRouter(connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Home))
