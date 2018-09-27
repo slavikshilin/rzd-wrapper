@@ -4,11 +4,13 @@ import { Provider } from 'react-redux'
 import { Route, BrowserRouter, Switch, Redirect } from 'react-router-dom'
 import { Layout } from 'antd';
 import { store } from './store/configureStore'
+import 'antd/dist/antd.css';
 import './index.css';
 import LoginPage from './pages/loginPage';
 import HomePage from './pages/homePage';
 import registerServiceWorker from './registerServiceWorker';
-import 'antd/dist/antd.css';
+
+const { Footer } = Layout;
 
 function isLoggedIn() {
     console.log('node_env: ', process.env.NODE_ENV)
@@ -18,7 +20,7 @@ function isLoggedIn() {
 ReactDOM.render(
     <Provider store={store}>
         <BrowserRouter>
-            <Layout style={{height:"100vh"}}>
+            <Layout align="middle" style={{height:"100vh"}}>
                 <Switch>
                     <Route exact path='/' render={() => (
                         isLoggedIn() ? (
@@ -28,7 +30,8 @@ ReactDOM.render(
                         )
                     )}/>
                     <Route path='/login' component={LoginPage}/>
-                </Switch>   
+                </Switch>  
+                <Footer id="footer">© Вячеслав Шилин</Footer> 
             </Layout>         
         </BrowserRouter>
     </Provider>,

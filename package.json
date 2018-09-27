@@ -1,10 +1,12 @@
 {
-  "name": "react-antd",
-  "version": "0.1.0",
+  "name": "rzd-wrapper",
+  "version": "0.1.1",
+  "description": "Wrapper for pass.rzd.ru",
+  "author": "Vyacheslav Shilin",
+  "license": "MIT",
   "private": true,
   "dependencies": {
     "antd": "^3.9.2",
-    "axios": "^0.18.0",
     "react": "^16.5.1",
     "react-dom": "^16.5.1",
     "react-redux": "^5.0.7",
