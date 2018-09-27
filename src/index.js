@@ -31,7 +31,7 @@ ReactDOM.render(
                     )}/>
                     <Route path='/login' component={LoginPage}/>
                 </Switch>  
-                <Footer id="footer">© Вячеслав Шилин</Footer> 
+                <Footer className="main-footer" id="footer">© Вячеслав Шилин</Footer> 
             </Layout>         
         </BrowserRouter>
     </Provider>,
