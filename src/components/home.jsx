@@ -14,6 +14,7 @@ class Home extends Component {
 
     var trainProp = ((trains) && (trains.trainsInfo)) ? trains.trainsInfo[0] : []
     var trainErr = ((trains) && (trains.err)) ? trains.err[0] : []
+    var isFetching =  ((trains) && (trains.isFetching)) ? trains.isFetching : false
 
     const fromCode = '2000000'
     const toCode = '2024000'
@@ -59,7 +60,7 @@ class Home extends Component {
         </Footer>
         <Content>
           <div className="main-control">
-            <Complete /><Complete /><DatePicker format="DD.MM.YYYY" locale={locale}/><Button type="primary" icon="search" loading={false} onClick={() => fetchTrainsAction(fromCode, toCode, date)} className="btn-search">Найти</Button>
+            <Complete /><Complete /><DatePicker format="DD.MM.YYYY" locale={locale}/><Button type="primary" icon="search" loading={isFetching} onClick={() => fetchTrainsAction(fromCode, toCode, date)} className="btn-search">Найти</Button>
           </div>
           <div>
             <TrainsView trains={trainProp} err={trainErr} />
