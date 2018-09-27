@@ -60,7 +60,7 @@ body {
 }
 
 .ant-select-dropdown-menu-all {
-  width: 400px;
+  width: 350px;
 }
 
 .ant-input.ant-select-search__field {
@@ -69,4 +69,12 @@ body {
 
 .ant-select-dropdown-menu.ant-select-dropdown-menu-root.ant-select-dropdown-menu-vertical {
   max-height: 350px;
+}
+
+.main-control > * {
+  margin: 5px;  
+}
+
+.btn-search {
+  width: 200px;  
 }

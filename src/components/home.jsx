@@ -1,13 +1,23 @@
 import React, { Component } from 'react'
 import Mailto from './react-mailto'
-import { Layout, Popover } from 'antd'
+import TrainsView from './trainsView'
+import { Layout, Popover, Button, DatePicker } from 'antd'
+import locale from 'antd/lib/date-picker/locale/ru_RU';
+import 'moment/locale/ru';
 import Complete from './complete'
 
 const { Content, Footer } = Layout;
 class Home extends Component {
 
   render() {
-    const { page, history, fetchLogoutAction } = this.props
+    const { page, trains, history, fetchLogoutAction, fetchTrainsAction } = this.props
+
+    var trainProp = ((trains) && (trains.trainsInfo)) ? trains.trainsInfo[0] : []
+    var trainErr = ((trains) && (trains.err)) ? trains.err[0] : []
+
+    const fromCode = '2000000'
+    const toCode = '2024000'
+    const date = '30.09.2018'    
 
     var userInfo = null
     if (page.userInfo) {
@@ -48,10 +58,12 @@ class Home extends Component {
           Параметры поиска билетов
         </Footer>
         <Content>
-          <div>
-            <Complete /> <Complete />
+          <div className="main-control">
+            <Complete /><Complete /><DatePicker format="DD.MM.YYYY" locale={locale}/><Button type="primary" icon="search" loading={false} onClick={() => fetchTrainsAction(fromCode, toCode, date)} className="btn-search">Найти</Button>
           </div>
-
+          <div>
+            <TrainsView trains={trainProp} err={trainErr} />
+          </div>
         </Content>
         <Footer></Footer>
       </Layout>
