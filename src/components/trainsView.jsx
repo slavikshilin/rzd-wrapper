@@ -12,7 +12,7 @@ class TrainsView extends Component {
             return (
 
                 <div>
-                    <nav class="navbar navbar-rzd" id="j-menu">
+                    <nav className="navbar navbar-rzd" id="j-menu">
                         <div className="navbar-header clearfix">
                             <table className="pull-left">
                                 <tbody>
