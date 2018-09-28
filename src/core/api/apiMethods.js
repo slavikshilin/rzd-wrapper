@@ -6,6 +6,36 @@ function getToken() {
 }
 
 /**
+ * Авторизация пользователя
+ * @param {string} user Имя пользователя
+ * @param {string} password Пароль пользователя
+ * @returns {Promise<Array<Object>>}
+ */
+export function getLogin(user, password) {
+	let urlEncodedUser = encodeURIComponent(user);
+	let urlEncodedPassword = encodeURIComponent(password);
+	return fetch(`${HOST_URL}/selfcare/j_security_check/ru?j_username=${urlEncodedUser}&j_password=${urlEncodedPassword}`);
+}
+
+/**
+ * Выход авторизованного пользователя
+ * @param {string} token токен авторизованного пользователя
+ * @returns {Promise<Object>}
+ */
+export function getLogout(token) {
+	return fetch(`${HOST_URL}/selfcare/ibm_security_logout?logoutExitPage=http://m.rzd.ru&token=${token}`);
+}
+
+/**
+ * Получение данных авторизованного пользователя
+ * @param {string} token токен авторизованного пользователя
+ * @returns {Promise<Object>}
+ */
+export function getUserInfo(token) {
+	return fetch(`${HOST_URL}/selfcare/user?token=${token}`);
+}
+
+/**
  * Автокомплит станций
  * @param {string} station Имя или код станции
  * @returns {Promise<Array<StationResponseItem>>}

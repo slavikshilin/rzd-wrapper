@@ -6,6 +6,7 @@ import { Layout } from 'antd';
 import { store } from './store/configureStore'
 import 'antd/dist/antd.css';
 import './index.css';
+import './mobile.css';
 import LoginPage from './pages/loginPage';
 import HomePage from './pages/homePage';
 import registerServiceWorker from './registerServiceWorker';
@@ -20,7 +21,7 @@ function isLoggedIn() {
 ReactDOM.render(
     <Provider store={store}>
         <BrowserRouter>
-            <Layout align="middle" style={{height:"100vh"}}>
+            <Layout align="middle">
                 <Switch>
                     <Route exact path='/' render={() => (
                         isLoggedIn() ? (

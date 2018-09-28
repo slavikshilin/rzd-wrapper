@@ -1,33 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-import { Layout, Alert } from 'antd';
+import { Layout } from 'antd';
+import AlertMessage from '../components/alertMessage'
 import Splash from '../components/splash'
 import WrappedLogin from '../components/login'
 import { fetchLogin } from '../actions/authActions'
 
 const { Content, Footer } = Layout;
-
-function onClose(e) {
-  console.log(e, 'I was closed.');
-};
-
-function AlertMessage(props) {
-  const err = props.err;
-  if (err) {
-    return <div className="ant-form login-form-message">
-            <Alert
-              message="Ошибка"
-              description={err.message}
-              type="error"
-              showIcon
-              onClose={onClose}
-            />
-          </div> 
-  } else {
-    return null
-  } 
-}
 
 class LoginPage extends Component {
  
