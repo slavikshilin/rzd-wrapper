@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import Mailto from './react-mailto'
 import TrainsView from './trainsView'
-import { Layout, Popover, Button, DatePicker } from 'antd'
+import { Layout, Button, DatePicker } from 'antd'
 import locale from 'antd/lib/date-picker/locale/ru_RU';
 import 'moment/locale/ru';
 import Complete from './complete'
+import UserPopover from './userPopover'
 
 const { Content, Footer } = Layout;
 class Home extends Component {
@@ -18,7 +18,7 @@ class Home extends Component {
 
     const fromCode = '2000000'
     const toCode = '2024000'
-    const date = '30.09.2018'    
+    const date = '30.10.2018'    
 
     var userInfo = null
     if (page.userInfo) {
@@ -29,29 +29,10 @@ class Home extends Component {
       userInfo = {}
     }
 
-    const content = (
-      <div>
-        <p>Фамилия: {userInfo.sn}</p>
-        <p>Имя: {userInfo.givenname}</p>
-        <p>Отчество: {userInfo.displayname}</p>
-        <p>Дата рождения: {userInfo.title}</p>
-        <p>Телефон: {userInfo.telephonenumber}</p>
-        <p>Email: &nbsp;
-          <Mailto email={userInfo.mail} >
-            {userInfo.mail}
-          </Mailto>
-        </p>
-      </div>
-    )
-
     return (
       <Layout className="main-layout">
         <div className="auth-header">
-          <Popover placement="bottomRight" content={content} title="Данные пользователя">
-            <span className="auth-link auth-link-logged">
-              {userInfo.cn}
-            </span>
-          </Popover>
+          <UserPopover userInfo={userInfo} />
           &nbsp;&nbsp;
           <span className="auth-link" type="primary" onClick={() => fetchLogoutAction(history)}>Выйти</span>
         </div>
