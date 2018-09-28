@@ -106,6 +106,7 @@ class AntdComplete extends React.Component {
   }
 
   render() {
+    const disabled = this.props.disabled
     const { dataSource } = this.state
 
     return (
@@ -116,6 +117,7 @@ class AntdComplete extends React.Component {
         onChange={onChange}
         onSearch={this.handleSearch}
         placeholder="Название станции"
+        disabled={disabled}
       />
     );
   }

@@ -41,7 +41,7 @@ class Home extends Component {
         </Footer>
         <Content>
           <div className="main-control">
-            <Complete /><Complete /><DatePicker format="DD.MM.YYYY" locale={locale}/><Button type="primary" icon="search" loading={isFetching} onClick={() => fetchTrainsAction(fromCode, toCode, date)} className="btn-search">Найти</Button>
+            <Complete disabled={isFetching}/><Complete disabled={isFetching}/><DatePicker disabled={isFetching} format="DD.MM.YYYY" locale={locale}/><Button type="primary" icon="search" loading={isFetching} onClick={() => fetchTrainsAction(fromCode, toCode, date)} className="btn-search">Найти</Button>
           </div>
           <div className="main-content-body">
             <TrainsView trains={trainProp} err={trainErr} />
