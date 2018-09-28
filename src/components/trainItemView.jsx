@@ -1,8 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
+import CarGroupItemView from './carGroupItemView'
 
 const TrainItemView = props => {
-    const train = props.trainProp;
+    const train = props.trainProp
 
     return (
         <div className="trslot">
@@ -47,13 +48,9 @@ const TrainItemView = props => {
                     </div>
                     <div className="trl-seats-cont">
                         <div className="trl-seats-box">
+                        
                             <ul className="trl-seats-list clearfix j-seats">
-                                <li className="trl-seats-item" style={{ cursor: "pointer" }}>Сидячий <span className="trl-seats-price">1699 руб.</span>&nbsp; (22)
-                            </li>
-                                <li className="trl-seats-item" style={{ cursor: "pointer" }}>Купе <span className="trl-seats-price">4815 руб.</span>&nbsp; (70)
-                            </li>
-                                <li className="trl-seats-item" style={{ cursor: "pointer" }}>Плацкартный <span className="trl-seats-price">2760 руб.</span>&nbsp; (34)
-                            </li>
+                                {train.cars.map((car, i) => <CarGroupItemView carProp={car} key={i} />)}
                             </ul>
                         </div>
                     </div>
