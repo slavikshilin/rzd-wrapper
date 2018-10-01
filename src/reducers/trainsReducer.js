@@ -1,4 +1,4 @@
-import { REQUEST_TRAINS, REQUEST_TRAINS_SUCCESS, REQUEST_TRAINS_FAILED } from '../actions/trainsActions'
+import { REQUEST_TRAINS, REQUEST_TRAINS_SUCCESS, REQUEST_TRAINS_FAILED, REQUEST_TRAINS_CLEAR } from '../actions/trainsActions'
   
   const initialState = {
     trainsInfo: null,
@@ -11,21 +11,26 @@ import { REQUEST_TRAINS, REQUEST_TRAINS_SUCCESS, REQUEST_TRAINS_FAILED } from '.
   
       case REQUEST_TRAINS:
         {
-          let newState = { ...state, trainsInfo: null, err: null, isFetching: true };
-          return newState;
+          let newState = { ...state, trainsInfo: null, err: null, isFetching: true }
+          return newState
         }
   
       case REQUEST_TRAINS_SUCCESS:
         {
-          let newState = { ...state, trainsInfo: action.payload, err: null, isFetching: false };
-          return newState;
+          let newState = { ...state, trainsInfo: action.payload, err: null, isFetching: false }
+          return newState
         }
   
       case REQUEST_TRAINS_FAILED:
         {
-          let newState = { ...state, trainsInfo: null, err: action.payload, isFetching: false };
-          return newState;
+          let newState = { ...state, trainsInfo: null, err: action.payload, isFetching: false }
+          return newState
         }
+
+        case REQUEST_TRAINS_CLEAR:
+        {
+          return initialState
+        }      
   
       default:
         return state

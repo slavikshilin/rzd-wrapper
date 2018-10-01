@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import moment from 'moment';
 import TrainsView from './trainsView'
 import { Layout, Button, DatePicker } from 'antd'
 import locale from 'antd/lib/date-picker/locale/ru_RU';
@@ -8,6 +9,11 @@ import UserPopover from './userPopover'
 
 const { Content, Footer } = Layout;
 class Home extends Component {
+
+  disabledDate = (current) => {
+    // Can not select days before today and today
+    return current && (current < moment().startOf('day'))
+  }
 
   onChangeDate = (date, dateString) => {
     this.props.changeDepartureDateAction(dateString)
@@ -47,7 +53,7 @@ class Home extends Component {
     const nonEmptySearchParams = fromCode && toCode && date
     const validateErr = nonEmptySearchParams && this.validateSearchParams(fromCode, toCode, date)
     const canSearch = nonEmptySearchParams && (!validateErr)
-    const showErr = trainErr || validateErr 
+    const showErr = trainErr 
 
     var userInfo = null
     if (auth.userInfo) {
@@ -65,14 +71,14 @@ class Home extends Component {
           &nbsp;&nbsp;
           <span className="auth-link" type="primary" onClick={() => fetchLogoutAction(history)}>Выйти</span>
         </div>
-        <Footer style={{ fontSize: "x-large" }}>
+        <div style={{ fontSize: "x-large" }}>
           Параметры поиска билетов
-        </Footer>
+        </div>
         <Content>
           <div className="main-control">
             <Complete placeholder="Откуда" disabled={isFetching} onChange={changeDepartureStationAction}/>
             <Complete placeholder="Куда" disabled={isFetching} onChange={changeArriveStationAction}/>
-            <DatePicker placeholder="Дата отправления" disabled={isFetching} format="DD.MM.YYYY" locale={locale} onChange={this.onChangeDate}/>
+            <DatePicker disabledDate={this.disabledDate} placeholder="Дата отправления" disabled={isFetching} format="DD.MM.YYYY" locale={locale} onChange={this.onChangeDate}/>
             <Button type="primary" icon="search" disabled={!canSearch} loading={isFetching} onClick={() => fetchTrainsAction(fromCode, toCode, date)} className="btn-search">Найти</Button>
           </div>
           <div className="main-content-body">

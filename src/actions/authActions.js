@@ -58,7 +58,6 @@ export function fetchLogout(history) {
       .then(
         function (res) {
           if (res.ok) {
-            console.log(res.headers)
             return res.json()
           }
           throw new Error(`Network response was not ok. ${res.status} ${res.statusText}`)
@@ -92,7 +91,6 @@ export function fetchLogin(login, password, history) {
         function (res) {
 
           if (res.ok) {
-            console.log(res.headers)
             return res.json()
           }
 

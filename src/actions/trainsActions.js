@@ -3,6 +3,7 @@ import { getTrains } from "../core/api/apiMethods";
 export const REQUEST_TRAINS = 'REQUEST_TRAINS'
 export const REQUEST_TRAINS_SUCCESS = 'REQUEST_TRAINS_SUCCESS'
 export const REQUEST_TRAINS_FAILED = 'REQUEST_TRAINS_FAILED'
+export const REQUEST_TRAINS_CLEAR = 'REQUEST_TRAINS_CLEAR'
 
 function requestTrainList() {
   return {
@@ -24,6 +25,12 @@ function requestTrainListError(err) {
   }
 }
 
+export  function clearTrains() {
+  return {
+    type: REQUEST_TRAINS_CLEAR
+  }
+}
+
 export function fetchTrains(fromCode, toCode, date, rid) {
   return (dispatch) => {
     dispatch(requestTrainList());
@@ -32,7 +39,6 @@ export function fetchTrains(fromCode, toCode, date, rid) {
       .then(
         function (res) {
           if (res.ok) {
-            console.log(res.headers)
             return res.json()
           }
           throw new Error(`Network response was not ok. ${res.status} ${res.statusText}`)

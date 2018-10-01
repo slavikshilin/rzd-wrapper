@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { fetchLogout } from '../actions/authActions'
-import { fetchTrains } from '../actions/trainsActions'
+import { fetchTrains, clearTrains } from '../actions/trainsActions'
 import { changeDepartureStation, changeArriveStation, changeDepartureDate } from '../actions/searchActions'
 import Home from '../components/home'
 import Splash from '../components/splash'
@@ -54,7 +54,10 @@ const mapStateToProps = store => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchLogoutAction: (history) => dispatch(fetchLogout(history)),
+    fetchLogoutAction: (history) => { 
+      dispatch(fetchLogout(history)) 
+      dispatch(clearTrains())
+    },
     changeDepartureStationAction: (code) => dispatch(changeDepartureStation(code)), 
     changeArriveStationAction: (code) => dispatch(changeArriveStation(code)), 
     changeDepartureDateAction: (date) => dispatch(changeDepartureDate(date)), 

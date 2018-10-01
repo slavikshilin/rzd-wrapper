@@ -42,7 +42,7 @@ const mapStateToProps = store => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchLoginAction: (login, password, history) => dispatch(fetchLogin(login, password, history)),
+    fetchLoginAction: (login, password, history) => dispatch(fetchLogin(login, password, history))
   }
 }
 

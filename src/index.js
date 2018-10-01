@@ -14,7 +14,6 @@ import registerServiceWorker from './registerServiceWorker';
 const { Footer } = Layout;
 
 function isLoggedIn() {
-    console.log('node_env: ', process.env.NODE_ENV)
     return localStorage.getItem('cks_token') !== null
 }
 

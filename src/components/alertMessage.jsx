@@ -20,7 +20,7 @@ const AlertMessage = props => {
 }
 
 AlertMessage.propTypes = {
-	err: PropTypes.string
+	err: PropTypes.object
 };
 
 export default AlertMessage;  

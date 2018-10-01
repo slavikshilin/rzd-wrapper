@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import CarGroupItemView from './carGroupItemView'
+import TrainItemTimeView from './trainItemTimeView'
 
 const TrainItemView = props => {
     const train = props.trainProp
@@ -26,20 +27,23 @@ const TrainItemView = props => {
                     <div className="row">
                         <div className="trl-train-trip-brief clearfix">
                             <div className="clearfix trl-train-datetime">
-                                <div className="col-xs-5">
-                                    <div className="trl-train-datetime-item">{train.date0}
-                                    <div className="text-red">{train.time0}<span className="text-muted text-normal text-small">&nbsp;(МСК)</span></div>
-                                    </div>
-                                </div>
-                                <div className="trl-train-datetime-arrow trl-train-datetime-item col-xs-1">→</div>
-                                <div className="col-xs-6">
-                                    <div className="trl-train-datetime-item">{train.localDate1}
-                                    <div className="text-red">{train.localTime1}<span className="text-muted text-normal text-small">&nbsp;{train.timeDeltaString1}</span></div>
-                                    </div>
-                                    &nbsp;
-                                    <div className="trl-train-datetime-item text-normal text-small">
-                                        {train.date1} {train.time1}<span className="text-muted text-normal text-small">&nbsp;(МСК)</span></div>
-                                </div>
+
+                                <TrainItemTimeView
+                                    localDate={train.localDate0}
+                                    localTime={train.localTime0}
+                                    timeDeltaString={train.timeDeltaString0}
+                                    date={train.date0}
+                                    time={train.time0} />
+
+                                <div className="trl-train-datetime-arrow trl-train-datetime-item col-xs-2">→</div>
+
+                                <TrainItemTimeView
+                                    localDate={train.localDate1}
+                                    localTime={train.localTime1}
+                                    timeDeltaString={train.timeDeltaString1}
+                                    date={train.date1}
+                                    time={train.time1} />
+
                             </div>
                             <div className="clearfix col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <div>В пути {train.timeInWay}</div>
@@ -48,7 +52,7 @@ const TrainItemView = props => {
                     </div>
                     <div className="trl-seats-cont">
                         <div className="trl-seats-box">
-                        
+
                             <ul className="trl-seats-list clearfix j-seats">
                                 {train.cars.map((car, i) => <CarGroupItemView carProp={car} key={i} />)}
                             </ul>
