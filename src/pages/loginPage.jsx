@@ -13,9 +13,9 @@ class LoginPage extends Component {
  
   render() {
     localStorage.clear()
-    const { page, fetchLoginAction, history } = this.props
+    const { auth, fetchLoginAction, history } = this.props
 
-    if (page.isFetching) {
+    if (auth.isFetching) {
       return (
         <Splash />
       )
@@ -23,10 +23,10 @@ class LoginPage extends Component {
       return (
         <Layout align="middle">
           <Footer style={{ fontSize: "x-large" }}>
-            <AlertMessage err={page.err}/>
+            <AlertMessage err={auth.err}/>
             Авторизация на сайте
           </Footer>
-          <Content><WrappedLogin err={page.err} history={history} onSubmitBtn={(login, password, history) => fetchLoginAction(login, password, history)}/></Content>
+          <Content><WrappedLogin err={auth.err} history={history} onSubmitBtn={(login, password, history) => fetchLoginAction(login, password, history)}/></Content>
           <Footer></Footer>
         </Layout>
       )      
@@ -36,7 +36,7 @@ class LoginPage extends Component {
 
 const mapStateToProps = store => {
   return {
-    page: store.page,
+    auth: store.auth,
   }
 }
 

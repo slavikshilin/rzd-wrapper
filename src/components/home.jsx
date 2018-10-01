@@ -10,7 +10,7 @@ const { Content, Footer } = Layout;
 class Home extends Component {
 
   render() {
-    const { page, trains, history, fetchLogoutAction, fetchTrainsAction } = this.props
+    const { auth, trains, history, fetchLogoutAction, fetchTrainsAction } = this.props
 
     var trainProp = ((trains) && (trains.trainsInfo)) ? trains.trainsInfo[0] : []
     var trainErr = ((trains) && (trains.err)) ? trains.err[0] : null
@@ -21,8 +21,8 @@ class Home extends Component {
     const date = '30.10.2018'    
 
     var userInfo = null
-    if (page.userInfo) {
-      userInfo = page.userInfo
+    if (auth.userInfo) {
+      userInfo = auth.userInfo
     } else if (localStorage.getItem('cks_token')) {
       userInfo = JSON.parse(localStorage.getItem('cks_token')).userInfo
     } else {

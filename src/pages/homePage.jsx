@@ -10,15 +10,15 @@ class HomePage extends Component {
 
   render() {
 
-    const { page, trains, history, fetchLogoutAction, fetchTrainsAction } = this.props
+    const { auth, trains, history, fetchLogoutAction, fetchTrainsAction } = this.props
 
-    if (page.isFetching) {
+    if (auth.isFetching) {
       return (
         <Splash />
       )
     } else {
       return (
-        <Home page={page} trains={trains} history={history} fetchLogoutAction={fetchLogoutAction} fetchTrainsAction={fetchTrainsAction} />         
+        <Home auth={auth} trains={trains} history={history} fetchLogoutAction={fetchLogoutAction} fetchTrainsAction={fetchTrainsAction} />         
       )      
     }
   }
@@ -26,7 +26,7 @@ class HomePage extends Component {
 
 const mapStateToProps = store => {
     return {
-      page: store.page,
+      auth: store.auth,
       trains: store.trains
     }
 }
