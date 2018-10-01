@@ -5,6 +5,15 @@ import TrainItemTimeView from './trainItemTimeView'
 import ElRegView from './elRegView'
 import VarPriceView from './varPriceView'
 
+function getDurationString(durationStr) {
+    var duration = durationStr.split(':')
+    if (duration.length === 2) {
+        return `${Number(duration[0])} ч. ${Number(duration[1])} мин.`      
+    } else {
+        return durationStr
+    }
+}
+
 const TrainItemView = props => {
     const train = props.trainProp
 
@@ -48,7 +57,7 @@ const TrainItemView = props => {
 
                             </div>
                             <div className="clearfix col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                <div>В пути {train.timeInWay}</div>
+                                <div>В пути {getDurationString(train.timeInWay)}</div>
                             </div>
                         </div>
                     </div>
