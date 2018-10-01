@@ -2,6 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import CarGroupItemView from './carGroupItemView'
 import TrainItemTimeView from './trainItemTimeView'
+import ElRegView from './elRegView'
+import VarPriceView from './varPriceView'
 
 const TrainItemView = props => {
     const train = props.trainProp
@@ -61,11 +63,8 @@ const TrainItemView = props => {
                 </div>
                 <div className="trl-icons">
                     <ul className="trl-icons-list clearfix j-props">
-                        <li title="Возможна электронная регистрация" className="trl-icon-er" data-id="er" style={{ cursor: "pointer" }}></li>
-                        <li title="Поезд/вагон входит в программу Динамическое ценообразование" className="trl-icon-dc" data-id="dc" style={{ cursor: "pointer" }}></li>
-                        <li title="На нашем сайте можно оплатить перевозку электронной, бытовой видео- и аудиотехники, спортивного и туристического инвентаря сверх установленной нормы (36 кг). Для перевозки другой категории ручной клади сверх установленной нормы (36 кг) необходимо приобрести дополнительный билет или оформить перевозку в багажном купе." className="trl-icon-addHandLuggage" data-id="addHandLuggage" style={{ cursor: "pointer" }}></li>
-                        <li title="Перевозка в специализированном купе для багажа - не более трех мест на каждый электронный билет. Вес одного места не более 75 кг. Общий вес трех мест не более 200 кг." className="trl-icon-addCompLuggage" data-id="addCompLuggage" style={{ cursor: "pointer" }}></li>
-                        <li title="" className="trl-icon-saleDepth89" data-id="saleDepth89" style={{ cursor: "pointer", display: "none" }}></li>
+                        <ElRegView enabled={train.elReg} />
+                        <VarPriceView enabled={train.varPrice} />
                     </ul>
                 </div>
             </div>

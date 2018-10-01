@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import moment from 'moment';
-import TrainsView from './trainsView'
+import TrainsView from './train/trainsView'
 import { Layout, Button, DatePicker } from 'antd'
 import locale from 'antd/lib/date-picker/locale/ru_RU';
 import 'moment/locale/ru';

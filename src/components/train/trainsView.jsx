@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import AlertMessage from '../components/alertMessage'
+import AlertMessage from '../alertMessage'
 import TrainItemView from './trainItemView'
 
 class TrainsView extends Component {
