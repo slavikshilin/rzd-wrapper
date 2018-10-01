@@ -9,16 +9,45 @@ import UserPopover from './userPopover'
 const { Content, Footer } = Layout;
 class Home extends Component {
 
+  onChangeDate = (date, dateString) => {
+    this.props.changeDepartureDateAction(dateString)
+  }
+
+  validateSearchParams = (fromCode, toCode, date) => {
+    if (!fromCode.match(/^\d{7}$/g)) {
+      return 'Неверно задана станция отправления'
+    } else if (!toCode.match(/^\d{7}$/g)) {
+      return 'Неверно задана станция прибытия'
+    } else if (!date.match(/^(0[1-9]|[12][0-9]|3[01])[- ..](0[1-9]|1[012])[- ..](19|20)\d\d$/g)) {
+      return 'Неверно задана дата отправления'
+    } else {
+      return null
+    }
+  }
+
   render() {
-    const { auth, trains, history, fetchLogoutAction, fetchTrainsAction } = this.props
+    const { 
+      auth, 
+      search, 
+      trains, 
+      history, 
+      fetchLogoutAction, 
+      fetchTrainsAction, 
+      changeDepartureStationAction, 
+      changeArriveStationAction
+    } = this.props
 
-    var trainProp = ((trains) && (trains.trainsInfo)) ? trains.trainsInfo[0] : []
-    var trainErr = ((trains) && (trains.err)) ? trains.err[0] : null
-    var isFetching =  ((trains) && (trains.isFetching)) ? trains.isFetching : false
+    const trainProp = ((trains) && (trains.trainsInfo)) ? trains.trainsInfo[0] : []
+    const trainErr = ((trains) && (trains.err)) ? trains.err : null
+    const isFetching = ((trains) && (trains.isFetching)) ? trains.isFetching : false
 
-    const fromCode = '2000000'
-    const toCode = '2024000'
-    const date = '30.10.2018'    
+    const fromCode = (search.fromCode) ? search.fromCode : null
+    const toCode = (search.fromCode) ? search.toCode : null
+    const date = (search.date) ? search.date : null    
+    const nonEmptySearchParams = fromCode && toCode && date
+    const validateErr = nonEmptySearchParams && this.validateSearchParams(fromCode, toCode, date)
+    const canSearch = nonEmptySearchParams && (!validateErr)
+    const showErr = trainErr || validateErr 
 
     var userInfo = null
     if (auth.userInfo) {
@@ -41,10 +70,13 @@ class Home extends Component {
         </Footer>
         <Content>
           <div className="main-control">
-            <Complete disabled={isFetching}/><Complete disabled={isFetching}/><DatePicker disabled={isFetching} format="DD.MM.YYYY" locale={locale}/><Button type="primary" icon="search" loading={isFetching} onClick={() => fetchTrainsAction(fromCode, toCode, date)} className="btn-search">Найти</Button>
+            <Complete placeholder="Откуда" disabled={isFetching} onChange={changeDepartureStationAction}/>
+            <Complete placeholder="Куда" disabled={isFetching} onChange={changeArriveStationAction}/>
+            <DatePicker placeholder="Дата отправления" disabled={isFetching} format="DD.MM.YYYY" locale={locale} onChange={this.onChangeDate}/>
+            <Button type="primary" icon="search" disabled={!canSearch} loading={isFetching} onClick={() => fetchTrainsAction(fromCode, toCode, date)} className="btn-search">Найти</Button>
           </div>
           <div className="main-content-body">
-            <TrainsView trains={trainProp} err={trainErr} />
+            <TrainsView trains={trainProp} err={showErr} />
           </div>
         </Content>
         <Footer></Footer>

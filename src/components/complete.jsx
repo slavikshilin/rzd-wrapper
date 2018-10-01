@@ -6,9 +6,11 @@ function onSelect(value, option) {
   console.log('onSelect', value);
 }
 
+/*
 function onChange(value) {
   console.log('onChange', value) 
 }
+*/
 
 const defaultCities = [
   {
@@ -106,7 +108,7 @@ class AntdComplete extends React.Component {
   }
 
   render() {
-    const disabled = this.props.disabled
+    const { placeholder, disabled , onChange } = this.props
     const { dataSource } = this.state
 
     return (
@@ -116,7 +118,7 @@ class AntdComplete extends React.Component {
         onSelect={onSelect}
         onChange={onChange}
         onSearch={this.handleSearch}
-        placeholder="Название станции"
+        placeholder={placeholder}
         disabled={disabled}
       />
     );

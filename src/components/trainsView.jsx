@@ -8,7 +8,9 @@ class TrainsView extends Component {
 
         if (err) {
             return (<AlertMessage err={err} />)
-        } else if (trains.from) {
+        } else if (trains.msgList && (trains.msgList.length > 0)) {
+            return (<AlertMessage err={new Error(trains.msgList[0].message)} />)
+        } else if (trains.list && (trains.list.length > 0)) {
             return (
 
                 <div>
