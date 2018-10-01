@@ -26,7 +26,7 @@ const TrainItemTimeView = props => {
             <div className="col-xs-5">
                 <div>
                     <div className="trl-train-datetime-item">
-                        <span className="text-muted text-normal text-small">Московское время (местное время совпадает с московским):</span>&nbsp;
+                        <span className="text-muted text-normal text-small">Московское время:</span>&nbsp;
                         {date} {time}<span className="text-muted text-normal text-small"></span>
                     </div>
                 </div>
