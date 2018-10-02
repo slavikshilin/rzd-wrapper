@@ -72,7 +72,7 @@ export function getTrains(fromCode, toCode, date, rid) {
  */ 
 export function getCars(fromCode, toCode, date, tnum, rid) {
 
-	const baseUrl = `${HOST_URL}/timetable/public/ru?layer_id=5764&code0=${fromCode}&code1=${toCode}&dir=0&dt0=${date}&tnum=${tnum}&token=${getToken()}`
+	const baseUrl = `${HOST_URL}/timetable/public/ru?layer_id=5764&code0=${fromCode}&code1=${toCode}&dir=0&dt0=${date}&tnum0=${tnum}&token=${getToken()}`
 
 	const url = rid ? `${baseUrl}&rid=${rid}` : baseUrl
 	return fetch(url)

@@ -16,6 +16,8 @@ function getDurationString(durationStr) {
 
 const TrainItemView = props => {
     const train = props.trainProp
+    const { trains, history } = props
+    const fetchCarsAction = props.fetchCarsAction
 
     return (
         <div className="trslot">
@@ -65,7 +67,7 @@ const TrainItemView = props => {
                         <div className="trl-seats-box">
 
                             <ul className="trl-seats-list clearfix j-seats">
-                                {train.cars.map((car, i) => <CarGroupItemView carProp={car} key={i} />)}
+                                {train.cars.map((car, i) => <CarGroupItemView carProp={car} key={i} train={train} trains={trains} fetchCarsAction={fetchCarsAction} history={history} />)}
                             </ul>
                         </div>
                     </div>

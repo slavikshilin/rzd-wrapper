@@ -39,6 +39,7 @@ class Home extends Component {
       history, 
       fetchLogoutAction, 
       fetchTrainsAction, 
+      fetchCarsAction, 
       changeDepartureStationAction, 
       changeArriveStationAction
     } = this.props
@@ -82,7 +83,7 @@ class Home extends Component {
             <Button type="primary" icon="search" disabled={!canSearch} loading={isFetching} onClick={() => fetchTrainsAction(fromCode, toCode, date)} className="btn-search">Найти</Button>
           </div>
           <div className="main-content-body">
-            <TrainsView trains={trainProp} err={showErr} />
+            <TrainsView trains={trainProp} err={showErr} fetchCarsAction={fetchCarsAction} history={history}/>
           </div>
         </Content>
         <Footer></Footer>

@@ -81,6 +81,10 @@
   padding: 9px;  
 }
 
+.btn-car-group {
+  margin-right: 10px;  
+}
+
 .field-validation-error-tip {
   background: red;
   color: #fff;

@@ -9,6 +9,7 @@ import './index.css';
 import './mobile.css';
 import LoginPage from './pages/loginPage';
 import HomePage from './pages/homePage';
+import CarsPage from './pages/carsPage';
 import registerServiceWorker from './registerServiceWorker';
 
 const { Footer } = Layout;
@@ -30,6 +31,13 @@ ReactDOM.render(
                         )
                     )}/>
                     <Route path='/login' component={LoginPage}/>
+                    <Route exact path='/cars' render={() => (
+                        isLoggedIn() ? (
+                            <CarsPage to="/cars"/>
+                        ) : (
+                            <Redirect to="/login" push={true} />
+                        )
+                    )}/>
                 </Switch>  
                 <Footer className="main-footer" id="footer">© Вячеслав Шилин</Footer> 
             </Layout>         

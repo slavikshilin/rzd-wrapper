@@ -4,7 +4,7 @@ import TrainItemView from './trainItemView'
 
 class TrainsView extends Component {
     render() {
-        const { trains, err } = this.props
+        const { trains, err, fetchCarsAction, history } = this.props
 
         if (err) {
             return (<AlertMessage err={err} />)
@@ -25,15 +25,12 @@ class TrainsView extends Component {
                                     </tr>
                                 </tbody>
                             </table>
-                            <div className="pull-right">
-                                <div className="navbar-header-logo"><img src="/images/mpass/logo_rzd.png" alt="" /></div>
-                            </div>
                         </div>
                     </nav>
 
                     <div align="left" className="j-route">
                         <div className="trl-routeinfo-brief j-route-info route-info">
-                            <div> {trains.from} —{trains.where}</div>
+                            <div> {trains.from} — {trains.where}</div>
                             <div className="route-info-datetime clearfix">
                                 <div className="pull-left route-info-datetime-item"><span className="glyphicon glyphicon-calendar"></span>{trains.date}</div>
                                 <div className="pull-left route-info-datetime-item"><span className="glyphicon glyphicon-time"></span> 00:00 - 24:00</div>
@@ -43,7 +40,7 @@ class TrainsView extends Component {
 
 
                     <div align="left" className="j-trains-list trlist">
-                        {trains.list.map((train, i) => <TrainItemView trainProp={train} key={i} />)}
+                        {trains.list.map((train, i) => <TrainItemView trains={trains} trainProp={train} key={i} fetchCarsAction={fetchCarsAction} history={history}/>)}
                     </div>
 
                 </div>
