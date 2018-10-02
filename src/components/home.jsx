@@ -35,7 +35,7 @@ class Home extends Component {
     const { 
       auth, 
       search, 
-      trains, 
+      trains,
       history, 
       fetchLogoutAction, 
       fetchTrainsAction, 

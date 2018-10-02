@@ -67,7 +67,7 @@ const TrainItemView = props => {
                         <div className="trl-seats-box">
 
                             <ul className="trl-seats-list clearfix j-seats">
-                                {train.cars.map((car, i) => <CarGroupItemView carProp={car} key={i} train={train} trains={trains} fetchCarsAction={fetchCarsAction} history={history} />)}
+                                {train.cars.map((car, i) => <CarGroupItemView carProp={car} id={i} key={i} train={train} trains={trains} fetchCarsAction={fetchCarsAction} history={history} />)}
                             </ul>
                         </div>
                     </div>

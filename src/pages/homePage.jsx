@@ -33,7 +33,7 @@ class HomePage extends Component {
       return (
         <Home 
           auth={auth} 
-          trains={trains} 
+          trains={trains}
           search={search}
           history={history}
           changeDepartureStationAction={changeDepartureStationAction}

@@ -40,7 +40,7 @@ class TrainsView extends Component {
 
 
                     <div align="left" className="j-trains-list trlist">
-                        {trains.list.map((train, i) => <TrainItemView trains={trains} trainProp={train} key={i} fetchCarsAction={fetchCarsAction} history={history}/>)}
+                        {trains.list.map((train, i) => <TrainItemView trains={trains} trainProp={train} key={i} fetchCarsAction={fetchCarsAction} history={history} />)}
                     </div>
 
                 </div>
