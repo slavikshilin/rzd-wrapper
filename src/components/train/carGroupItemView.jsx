@@ -3,10 +3,11 @@ import PropTypes from "prop-types";
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { Button } from 'antd'
+import { fetchCars } from '../../actions/carsActions'
 
 const CarGroupItemView = props => {
     const car = props.carProp
-    const { trains, train, fetchCarsAction, history, cars, id } = props
+    const { trains, train, fetchCarsAction, history, cars } = props
 
     return (
         <Button 
@@ -30,7 +31,14 @@ const mapStateToProps = store => {
         cars: store.cars,
     }
 }
+
+const mapDispatchToProps = dispatch => {
+    return {
+      fetchCarsAction: (fromCode, toCode, date, tnum, history) => dispatch(fetchCars(fromCode, toCode, date, tnum, history)),    
+    }
+  }
   
 export default withRouter(connect(
-  mapStateToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(CarGroupItemView))
