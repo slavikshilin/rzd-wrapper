@@ -7,14 +7,17 @@ import { fetchCars } from '../../actions/carsActions'
 
 const CarGroupItemView = props => {
     const car = props.carProp
-    const { trains, train, fetchCarsAction, history, cars } = props
+    const { trains, train, fetchCarsAction, history, cars, id } = props
+    const isFetching = cars.isFetching && (cars.tnum === train.number) && (cars.id === id) 
+    const disabled = cars.isFetching && ((cars.tnum !== train.number) || (cars.id !== id))
 
     return (
         <Button 
             type="primary" 
             className="btn-car-group"
-            loading={cars.isFetching}
-            onClick={() => fetchCarsAction(trains.fromCode, trains.whereCode, trains.date, train.number, history)}>        
+            loading={isFetching}
+            disabled={disabled}
+            onClick={() => fetchCarsAction(trains.fromCode, trains.whereCode, trains.date, train.number, id, history)}>        
             
             {car.typeLoc}&nbsp;от&nbsp;{car.tariff} руб.&nbsp;(мест:&nbsp;{car.freeSeats})
         </Button>
@@ -34,7 +37,7 @@ const mapStateToProps = store => {
 
 const mapDispatchToProps = dispatch => {
     return {
-      fetchCarsAction: (fromCode, toCode, date, tnum, history) => dispatch(fetchCars(fromCode, toCode, date, tnum, history)),    
+      fetchCarsAction: (fromCode, toCode, date, tnum, id, history) => dispatch(fetchCars(fromCode, toCode, date, tnum, id, history)),    
     }
   }
   

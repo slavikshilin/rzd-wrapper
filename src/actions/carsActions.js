@@ -1,13 +1,17 @@
-import { getCars } from "../core/api/apiMethods";
+import { getCars} from '../core/api/apiMethods'
 
 export const REQUEST_CARS = 'REQUEST_CARS'
 export const REQUEST_CARS_SUCCESS = 'REQUEST_CARS_SUCCESS'
 export const REQUEST_CARS_FAILED = 'REQUEST_CARS_FAILED'
 export const REQUEST_CARS_CLEAR = 'REQUEST_CARS_CLEAR'
 
-function requestCarList() {
+function requestCarList(tnum, id) {
   return {
-    type: REQUEST_CARS
+    type: REQUEST_CARS,
+    payload: {
+      tnum,
+      id
+    }
   }
 }
 
@@ -25,15 +29,15 @@ function requestCarListError(err) {
   }
 }
 
-export  function clearCars() {
+export function clearCars() {
   return {
     type: REQUEST_CARS_CLEAR
   }
 }
 
-export function fetchCars(fromCode, toCode, date, tnum, history, rid) {
+export function fetchCars(fromCode, toCode, date, tnum, id, history, rid) {
   return (dispatch) => {
-    dispatch(requestCarList());
+    dispatch(requestCarList(tnum, id));
 
     getCars(fromCode, toCode, date, tnum, rid)
       .then(
@@ -49,7 +53,7 @@ export function fetchCars(fromCode, toCode, date, tnum, history, rid) {
           if (!res.data) {
             throw new Error(`Не удалось получить список вагонов`)
           } else if (res.data.result === 'RID') {
-            dispatch(fetchCars(fromCode, toCode, date, tnum, history, res.data.RID))
+            dispatch(fetchCars(fromCode, toCode, date, tnum, id, history, res.data.RID))
           } else if ((res.data.error) || ((res.data.result) && (res.data.result.FAIL))) {
             throw new Error(res.data.error)
           } else {

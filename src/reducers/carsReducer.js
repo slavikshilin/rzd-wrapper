@@ -4,6 +4,8 @@ import { REQUEST_CARS, REQUEST_CARS_SUCCESS, REQUEST_CARS_FAILED, REQUEST_CARS_C
     carsInfo: null,
     err: null,
     isFetching: false,
+    tnum: null,
+    id: null
   }
   
   export function carsReducer(state = initialState, action) {
@@ -11,25 +13,26 @@ import { REQUEST_CARS, REQUEST_CARS_SUCCESS, REQUEST_CARS_FAILED, REQUEST_CARS_C
   
       case REQUEST_CARS:
         {
-          let newState = { ...state, carsInfo: null, err: null, isFetching: true }
+          let newState = { ...state, carsInfo: null, err: null, isFetching: true, tnum: action.payload.tnum, id: action.payload.id }
           return newState
         }
   
       case REQUEST_CARS_SUCCESS:
         {
-          let newState = { ...state, carsInfo: action.payload, err: null, isFetching: false }
+          let newState = { ...state, carsInfo: action.payload, err: null, isFetching: false, tnum: null, id: null }
           return newState
         }
   
       case REQUEST_CARS_FAILED:
         {
-          let newState = { ...state, carsInfo: null, err: action.payload, isFetching: false }
+          let newState = { ...state, carsInfo: null, err: action.payload, isFetching: false, tnum: null, id: null }
           return newState
         }
 
         case REQUEST_CARS_CLEAR:
         {
-          return initialState
+          let newState = {...initialState}
+          return newState
         }      
   
       default:
