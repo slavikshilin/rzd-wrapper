@@ -36,6 +36,7 @@ class Home extends Component {
       auth, 
       search, 
       trains,
+      cars,
       history, 
       fetchLogoutAction, 
       fetchTrainsAction, 
@@ -46,7 +47,8 @@ class Home extends Component {
 
     const trainProp = ((trains) && (trains.trainsInfo)) ? trains.trainsInfo[0] : []
     const trainErr = ((trains) && (trains.err)) ? trains.err : null
-    const isFetching = ((trains) && (trains.isFetching)) ? trains.isFetching : false
+    const isFetching = trains.isFetching
+    const disabled = trains.isFetching || cars.isFetching
 
     const fromCode = (search.fromCode) ? search.fromCode : null
     const toCode = (search.fromCode) ? search.toCode : null
@@ -77,10 +79,10 @@ class Home extends Component {
         </div>
         <Content>
           <div className="main-control">
-            <Complete placeholder="Откуда" disabled={isFetching} onChange={changeDepartureStationAction}/>
-            <Complete placeholder="Куда" disabled={isFetching} onChange={changeArriveStationAction}/>
-            <DatePicker disabledDate={this.disabledDate} placeholder="Дата отправления" disabled={isFetching} format="DD.MM.YYYY" locale={locale} onChange={this.onChangeDate}/>
-            <Button type="primary" icon="search" disabled={!canSearch} loading={isFetching} onClick={() => fetchTrainsAction(fromCode, toCode, date)} className="btn-search">Найти</Button>
+            <Complete placeholder="Откуда" disabled={disabled} onChange={changeDepartureStationAction}/>
+            <Complete placeholder="Куда" disabled={disabled} onChange={changeArriveStationAction}/>
+            <DatePicker disabledDate={this.disabledDate} placeholder="Дата отправления" disabled={disabled} format="DD.MM.YYYY" locale={locale} onChange={this.onChangeDate}/>
+            <Button type="primary" icon="search" disabled={!canSearch || cars.isFetching} loading={isFetching} onClick={() => fetchTrainsAction(fromCode, toCode, date)} className="btn-search">Найти</Button>
           </div>
           <div className="main-content-body">
             <TrainsView trains={trainProp} err={showErr} fetchCarsAction={fetchCarsAction} history={history}/>

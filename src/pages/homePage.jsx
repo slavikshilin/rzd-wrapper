@@ -15,6 +15,7 @@ class HomePage extends Component {
     const { 
       auth, 
       trains, 
+      cars,
       search, 
       history, 
       fetchLogoutAction, 
@@ -34,6 +35,7 @@ class HomePage extends Component {
         <Home 
           auth={auth} 
           trains={trains}
+          cars={cars}
           search={search}
           history={history}
           changeDepartureStationAction={changeDepartureStationAction}
@@ -51,7 +53,8 @@ const mapStateToProps = store => {
     return {
       auth: store.auth,
       search: store.search,
-      trains: store.trains
+      trains: store.trains,
+      cars: store.cars
     }
 }
 
