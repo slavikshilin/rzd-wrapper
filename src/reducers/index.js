@@ -5,8 +5,8 @@ import { carsReducer } from './carsReducer'
 import { searchReducer } from './searchReducer'
 
 export const rootReducer = combineReducers({
-  auth: authReducer,
-  trains: trainsReducer,
-  cars: carsReducer,
-  search: searchReducer
+    auth: authReducer,
+    trains: trainsReducer,
+    cars: carsReducer,
+    search: searchReducer
 })

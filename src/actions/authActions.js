@@ -10,130 +10,130 @@ export const REQUEST_LOGOUT_SUCCESS = 'REQUEST_LOGOUT_SUCCESS'
 export const REQUEST_LOGOUT_FAILED = 'REQUEST_LOGOUT_FAILED'
 
 function requestLogin() {
-  return {
-    type: REQUEST_LOGIN
-  }
+    return {
+        type: REQUEST_LOGIN
+    }
 }
 
 function requestLoginSuccess(userInfo) {
-  return {
-    type: REQUEST_LOGIN_SUCCESS,
-    payload: userInfo
-  }
+    return {
+        type: REQUEST_LOGIN_SUCCESS,
+        payload: userInfo
+    }
 }
 
 function requestLoginError(err) {
-  return {
-    type: REQUEST_LOGIN_FAILED,
-    payload: err
-  }
+    return {
+        type: REQUEST_LOGIN_FAILED,
+        payload: err
+    }
 }
 
 function requestLogout() {
-  return {
-    type: REQUEST_LOGOUT
-  }
+    return {
+        type: REQUEST_LOGOUT
+    }
 }
 
 function requestLogoutSuccess() {
-  return {
-    type: REQUEST_LOGOUT_SUCCESS,
-  }
+    return {
+        type: REQUEST_LOGOUT_SUCCESS,
+    }
 }
 
 function requestLogoutError(err) {
-  return {
-    type: REQUEST_LOGOUT_FAILED,
-    payload: err
-  }
+    return {
+        type: REQUEST_LOGOUT_FAILED,
+        payload: err
+    }
 }
 
 export function fetchLogout(history) {
-  return (dispatch) => {
+    return (dispatch) => {
 
-    const token = getToken()
-    clearLocalStorage()
-    dispatch(requestLogout())
+        const token = getToken()
+        clearLocalStorage()
+        dispatch(requestLogout())
 
-    getLogout(token)
-      .then(
-        function (res) {
-          if (res.ok) {
-            return res.json()
-          }
-          throw new Error(`Network response was not ok. ${res.status} ${res.statusText}`)
-        }
-      )
-      .then(
-        function (res) {
-          if (res.authFlag) {
-            throw new Error(`Не удалось завершить сессию авторизации`)
-          }
-          dispatch(requestLogoutSuccess())
-          history.push("/login")
-        }
-      )
-      .catch (
-        err => { 
-          dispatch(requestLogoutError(err)) 
-          history.push("/login")
-        }
-      )
-  }
+        getLogout(token)
+            .then(
+                function (res) {
+                    if (res.ok) {
+                        return res.json()
+                    }
+                    throw new Error(`Network response was not ok. ${res.status} ${res.statusText}`)
+                }
+            )
+            .then(
+                function (res) {
+                    if (res.authFlag) {
+                        throw new Error(`Не удалось завершить сессию авторизации`)
+                    }
+                    dispatch(requestLogoutSuccess())
+                    history.push("/login")
+                }
+            )
+            .catch(
+                err => {
+                    dispatch(requestLogoutError(err))
+                    history.push("/login")
+                }
+            )
+    }
 }
 
 /*eslint-disable */
 export function fetchLogin(login, password, history) {
-  return (dispatch) => {
-    dispatch(requestLogin())
+    return (dispatch) => {
+        dispatch(requestLogin())
 
-    getLogin(login, password)
-      .then(
-        function (res) {
-
-          if (res.ok) {
-            return res.json()
-          }
-
-          throw new Error(`Network response was not ok. ${res.status} ${res.statusText}`)
-        }
-      )
-      .then(
-
-        function (res) {
-
-          if (!res.authFlag) {
-            throw new Error(`Неверный логин или пароль`)
-          }
-
-          var lToken = res.token
-
-          getUserInfo(lToken)
+        getLogin(login, password)
             .then(
-              function (res) {
+                function (res) {
 
-                if (res.ok) {
-                  return res.json()
-                }
-                throw new Error(`Network response was not ok. ${res.status} ${res.statusText}`)
-              }
-            )
-            .then( 
-              userInfo => { 
-                  dispatch(requestLoginSuccess(userInfo.data))
-                  //сохранение токена в localStorage
-                  setLocalStorage(lToken, userInfo.data)
-                  history.push("/")
+                    if (res.ok) {
+                        return res.json()
+                    }
+
+                    throw new Error(`Network response was not ok. ${res.status} ${res.statusText}`)
                 }
             )
-        }
-      )
-      .catch (
-        err => { 
-          localStorage.clear()
-          dispatch(requestLoginError(err)) 
-        }
-      )
-  }
+            .then(
+
+                function (res) {
+
+                    if (!res.authFlag) {
+                        throw new Error(`Неверный логин или пароль`)
+                    }
+
+                    var lToken = res.token
+
+                    getUserInfo(lToken)
+                        .then(
+                            function (res) {
+
+                                if (res.ok) {
+                                    return res.json()
+                                }
+                                throw new Error(`Network response was not ok. ${res.status} ${res.statusText}`)
+                            }
+                        )
+                        .then(
+                            userInfo => {
+                                dispatch(requestLoginSuccess(userInfo.data))
+                                //сохранение токена в localStorage
+                                setLocalStorage(lToken, userInfo.data)
+                                history.push("/")
+                            }
+                        )
+                }
+            )
+            .catch(
+                err => {
+                    localStorage.clear()
+                    dispatch(requestLoginError(err))
+                }
+            )
+    }
 }
 /*eslint-enable */
