@@ -1,4 +1,4 @@
-const HOST_URL = (process.env.NODE_ENV === 'development') ? 'http://localhost:4000' : 'https://rzd-wrapper-backend-veyrmmspzr.now.sh'
+const HOST_URL = (process.env.NODE_ENV === 'development') ? 'http://localhost:4000' : 'https://rzd-proxy.herokuapp.com'
 
 function getToken() {
 	const token = (localStorage.getItem('cks_token')) ? JSON.parse(localStorage.getItem('cks_token')).token : null	
