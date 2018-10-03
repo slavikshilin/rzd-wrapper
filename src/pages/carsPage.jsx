@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { fetchLogout } from '../actions/authActions'
+import { clearTrains } from '../actions/trainsActions'
 import { fetchCars, clearCars } from '../actions/carsActions'
 import CarsView from '../components/car/carsView'
 
@@ -50,6 +51,7 @@ const mapDispatchToProps = dispatch => {
     return {
         fetchLogoutAction: (history) => {
             dispatch(fetchLogout(history))
+            dispatch(clearTrains())
             dispatch(clearCars())
         },
         fetchCarsAction: (fromCode, toCode, date, tnum, history) => dispatch(fetchCars(fromCode, toCode, date, tnum, history)),

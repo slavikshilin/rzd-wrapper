@@ -65,6 +65,7 @@ const mapDispatchToProps = dispatch => {
         fetchLogoutAction: (history) => {
             dispatch(fetchLogout(history))
             dispatch(clearTrains())
+            dispatch(clearCars())
         },
         changeDepartureStationAction: (code) => dispatch(changeDepartureStation(code)),
         changeArriveStationAction: (code) => dispatch(changeArriveStation(code)),
