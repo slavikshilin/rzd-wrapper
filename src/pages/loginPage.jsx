@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { Layout } from 'antd';
 import AlertMessage from '../components/alertMessage'
-import Splash from '../components/splash'
 import WrappedLogin from '../components/login'
 import { fetchLogin } from '../actions/authActions'
 
@@ -15,22 +14,16 @@ class LoginPage extends Component {
     localStorage.clear()
     const { auth, fetchLoginAction, history } = this.props
 
-    if (auth.isFetching) {
-      return (
-        <Splash />
-      )
-    } else {
-      return (
-        <Layout align="middle">
-          <Footer style={{ fontSize: "x-large" }}>
-            <AlertMessage err={auth.err}/>
-            Авторизация на сайте
-          </Footer>
-          <Content><WrappedLogin err={auth.err} history={history} onSubmitBtn={(login, password, history) => fetchLoginAction(login, password, history)}/></Content>
-          <Footer></Footer>
-        </Layout>
-      )      
-    }
+    return (
+      <Layout align="middle">
+        <Footer style={{ fontSize: "x-large" }}>
+          <AlertMessage err={auth.err}/>
+          Авторизация на сайте
+        </Footer>
+        <Content><WrappedLogin isFetching={auth.isFetching} err={auth.err} history={history} onSubmitBtn={(login, password, history) => fetchLoginAction(login, password, history)}/></Content>
+        <Footer></Footer>
+      </Layout>
+    )      
   }
 }
 

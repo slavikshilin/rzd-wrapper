@@ -44,7 +44,8 @@ class Login extends React.Component {
   }
 
   render() {
-    const { getFieldDecorator, getFieldsError, getFieldError, isFieldTouched } = this.props.form;
+    const { getFieldDecorator, getFieldsError, getFieldError, isFieldTouched } = this.props.form
+    const { isFetching } = this.props
 
     // Only show error after a field is touched.
     const userNameError = isFieldTouched('userName') && getFieldError('userName');
@@ -60,7 +61,7 @@ class Login extends React.Component {
               { required: true, message: 'Введите логин!' },
               { validator: this.handleConfirmLogin }],
           })(
-            <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Логин" maxLength="20" />
+            <Input disabled={isFetching} prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Логин" maxLength="20" />
           )}
         </FormItem>
         <FormItem
@@ -72,7 +73,7 @@ class Login extends React.Component {
               { required: true, message: 'Введите пароль!' },
               { validator: this.handleConfirmPassword }],
           })(
-            <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Пароль" maxLength="20" />
+            <Input disabled={isFetching} prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Пароль" maxLength="20" />
           )}
         </FormItem>
         <FormItem>
@@ -80,6 +81,7 @@ class Login extends React.Component {
             className="login-form-button"
             type="primary"
             htmlType="submit"
+            loading={isFetching}
             disabled={hasErrors(getFieldsError())}
           >
             Войти
