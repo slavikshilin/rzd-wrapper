@@ -5,6 +5,7 @@ const initialState = {
     err: null,
     isFetching: false,
     tnum: null,
+    carType: null,
     id: null
 }
 
@@ -13,7 +14,7 @@ export function carsReducer(state = initialState, action) {
 
         case REQUEST_CARS:
             {
-                let newState = { ...state, carsInfo: null, err: null, isFetching: true, tnum: action.payload.tnum, id: action.payload.id }
+                let newState = { ...state, carsInfo: null, err: null, isFetching: true, tnum: action.payload.tnum, id: action.payload.id, carType: action.payload.carType }
                 return newState
             }
 

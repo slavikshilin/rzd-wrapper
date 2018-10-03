@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { fetchLogout } from '../actions/authActions'
 import { fetchTrains, clearTrains } from '../actions/trainsActions'
-import { fetchCars } from '../actions/carsActions'
+import { fetchCars, clearCars } from '../actions/carsActions'
 import { changeDepartureStation, changeArriveStation, changeDepartureDate } from '../actions/searchActions'
 import Home from '../components/home'
 import Splash from '../components/splash'
@@ -21,6 +21,7 @@ class HomePage extends Component {
             fetchLogoutAction,
             fetchTrainsAction,
             fetchCarsAction,
+            clearCarsAction,
             changeDepartureStationAction,
             changeArriveStationAction,
             changeDepartureDateAction
@@ -43,7 +44,8 @@ class HomePage extends Component {
                     changeDepartureDateAction={changeDepartureDateAction}
                     fetchLogoutAction={fetchLogoutAction}
                     fetchTrainsAction={fetchTrainsAction}
-                    fetchCarsAction={fetchCarsAction} />
+                    fetchCarsAction={fetchCarsAction}
+                    clearCarsAction={clearCarsAction} />
             )
         }
     }
@@ -69,6 +71,7 @@ const mapDispatchToProps = dispatch => {
         changeDepartureDateAction: (date) => dispatch(changeDepartureDate(date)),
         fetchTrainsAction: (fromCode, toCode, date) => dispatch(fetchTrains(fromCode, toCode, date)),
         fetchCarsAction: (fromCode, toCode, date, tnum, history) => dispatch(fetchCars(fromCode, toCode, date, tnum, history)),
+        clearCarsAction: () => dispatch(clearCars()),
     }
 }
 

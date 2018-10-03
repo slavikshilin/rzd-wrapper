@@ -5,12 +5,13 @@ export const REQUEST_CARS_SUCCESS = 'REQUEST_CARS_SUCCESS'
 export const REQUEST_CARS_FAILED = 'REQUEST_CARS_FAILED'
 export const REQUEST_CARS_CLEAR = 'REQUEST_CARS_CLEAR'
 
-function requestCarList(tnum, id) {
+function requestCarList(tnum, id, carType) {
     return {
         type: REQUEST_CARS,
         payload: {
             tnum,
-            id
+            id,
+            carType
         }
     }
 }
@@ -35,9 +36,9 @@ export function clearCars() {
     }
 }
 
-export function fetchCars(fromCode, toCode, date, tnum, id, history, rid) {
+export function fetchCars(fromCode, toCode, date, tnum, id, carType, history, rid) {
     return (dispatch) => {
-        dispatch(requestCarList(tnum, id))
+        dispatch(requestCarList(tnum, id, carType))
 
         getCars(fromCode, toCode, date, tnum, rid)
             .then(
@@ -53,7 +54,7 @@ export function fetchCars(fromCode, toCode, date, tnum, id, history, rid) {
                     if (!res.data) {
                         throw new Error(`Не удалось получить список вагонов`)
                     } else if (res.data.result === 'RID') {
-                        dispatch(fetchCars(fromCode, toCode, date, tnum, id, history, res.data.RID))
+                        dispatch(fetchCars(fromCode, toCode, date, tnum, id, carType, history, res.data.RID))
                     } else if (res.data.error) {
                         throw new Error(res.data.error)
                     } else if ((res.data.lst) && (res.data.lst.length > 0) && (res.data.lst[0].result === 'FAIL')) {

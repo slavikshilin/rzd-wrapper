@@ -43,6 +43,7 @@ class Home extends Component {
             fetchLogoutAction,
             fetchTrainsAction,
             fetchCarsAction,
+            clearCarsAction,
             changeDepartureStationAction,
             changeArriveStationAction
         } = this.props
@@ -79,7 +80,11 @@ class Home extends Component {
                         <Complete placeholder="Откуда" disabled={disabled} onChange={changeDepartureStationAction} />
                         <Complete placeholder="Куда" disabled={disabled} onChange={changeArriveStationAction} />
                         <DatePicker disabledDate={this.disabledDate} placeholder="Дата отправления" disabled={disabled} format="DD.MM.YYYY" locale={locale} onChange={this.onChangeDate} />
-                        <Button type="primary" icon="search" disabled={!canSearch || cars.isFetching} loading={isFetching} onClick={() => fetchTrainsAction(fromCode, toCode, date)} className="btn-search">Найти</Button>
+                        <Button type="primary" icon="search" disabled={!canSearch || cars.isFetching} loading={isFetching} onClick={
+                            () => { 
+                                clearCarsAction()
+                                fetchTrainsAction(fromCode, toCode, date) 
+                            }} className="btn-search">Найти</Button>
                     </div>
                     <div className="main-content-body">
                         <TrainsView trains={trainProp} err={showErr} fetchCarsAction={fetchCarsAction} history={history} />

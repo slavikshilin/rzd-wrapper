@@ -3,7 +3,8 @@ import { Layout } from 'antd'
 import AlertMessage from '../alertMessage'
 import AuthHeader from '../authHeader'
 import { getUserInfo } from '../../core/utils/userInfo'
-//import TrainItemTimeView from '../train/trainItemTimeView'
+import TrainItemTimeView from '../train/trainItemTimeView'
+import CarItemView from '../car/carItemView'
 
 const { Content } = Layout
 
@@ -11,6 +12,7 @@ class CarsView extends Component {
 	render() {
 		const { auth, cars, history, fetchLogoutAction } = this.props
 		const train = ((cars) && (cars.carsInfo)) ? cars.carsInfo[0] : []
+		const carType = cars.carType
 
 		if (train.result === 'FAIL') {
 			return (<AlertMessage err={new Error(train.error)} />)
@@ -42,32 +44,41 @@ class CarsView extends Component {
 									<div className="trl-train-datetime-item clearfix">
 										<div className="row">
 											<div className="col-lg-5 col-md-5 col-sm-5 col-xs-5">
-												<div>Москва Яр</div>
+												<div>{train.route0}</div>
 											</div>
 											<div className="col-lg-1 col-md-1 col-sm-1 col-xs-1 trl-train-datetime-arrow trl-train-datetime-item" style={{ padding: 0 }}>→</div>
 											<div className="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-												<div>Владивост</div>
+												<div>{train.route1}</div>
 											</div>
 										</div>
-										<div className="row datetime-info">
-											<div className="col-lg-6 col-md-6 col-sm-6 col-xs-6 datetime-flex-block">
-												<div>
-													<div className="fixed-inline">31.10.2018</div>
-													<div className="fixed-inline text-nowrap text-red">00:35<span className="text-muted text-small text-normal">(МСК)</span></div>
-												</div>
-											</div>
-											<div className="col-lg-6 col-md-6 col-sm-6 col-xs-6 datetime-flex-block">
-												<div>
-													<div className="fixed-inline">02.11.2018</div>
-													<div className="fixed-inline text-nowrap text-red">02:16 <span className="text-muted text-small text-normal">(МСК+3)</span></div>
-												</div>
-												<div className="secondary">
-													<div className="fixed-inline">01.11.2018</div>
-													<div className="fixed-inline text-nowrap">23:16	<span className="text-muted text-small text-normal">(МСК)</span></div>
-												</div>
-											</div>
+
+										<div className="clearfix trl-train-datetime">
+
+											<TrainItemTimeView
+												localDate={train.localDate0}
+												localTime={train.localTime0}
+												timeDeltaString={train.timeDeltaString0}
+												date={train.date0}
+												time={train.time0} />
+
+											<TrainItemTimeView
+												localDate={train.localDate1}
+												localTime={train.localTime1}
+												timeDeltaString={train.timeDeltaString1}
+												date={train.date1}
+												time={train.time1} />
+
 										</div>
+
 									</div>
+								</div>
+
+								<div align="left" className="j-content trlist">
+									{train.cars.filter(function(car) {
+											return car.type === carType
+										}).map((car, i) =>	
+										<CarItemView carProp={car} key={i} />
+									)}
 								</div>
 
 							</div>
