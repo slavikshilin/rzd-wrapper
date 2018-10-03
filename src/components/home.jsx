@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import moment from 'moment'
 import TrainsView from './train/trainsView'
-import { Layout, Button, DatePicker } from 'antd'
+import { Layout, Button, DatePicker, Modal } from 'antd'
 import locale from 'antd/lib/date-picker/locale/ru_RU'
 import 'moment/locale/ru'
 import Complete from './complete'
@@ -34,16 +34,16 @@ class Home extends Component {
   }
 
   render() {
-    const { 
-      auth, 
-      search, 
+    const {
+      auth,
+      search,
       trains,
       cars,
-      history, 
-      fetchLogoutAction, 
-      fetchTrainsAction, 
-      fetchCarsAction, 
-      changeDepartureStationAction, 
+      history,
+      fetchLogoutAction,
+      fetchTrainsAction,
+      fetchCarsAction,
+      changeDepartureStationAction,
       changeArriveStationAction
     } = this.props
 
@@ -54,11 +54,19 @@ class Home extends Component {
 
     const fromCode = (search.fromCode) ? search.fromCode : null
     const toCode = (search.fromCode) ? search.toCode : null
-    const date = (search.date) ? search.date : null    
+    const date = (search.date) ? search.date : null
     const nonEmptySearchParams = fromCode && toCode && date
     const validateErr = nonEmptySearchParams && this.validateSearchParams(fromCode, toCode, date)
     const canSearch = nonEmptySearchParams && (!validateErr)
-    const showErr = trainErr 
+    const showErr = trainErr
+
+    if (cars.err) {
+      Modal.error({
+        centered: true,
+        title: 'Ошибка',
+        content: cars.err.message,
+      })
+    }
 
     return (
       <Layout className="main-layout">
@@ -68,13 +76,13 @@ class Home extends Component {
         </div>
         <Content>
           <div className="main-control">
-            <Complete placeholder="Откуда" disabled={disabled} onChange={changeDepartureStationAction}/>
-            <Complete placeholder="Куда" disabled={disabled} onChange={changeArriveStationAction}/>
-            <DatePicker disabledDate={this.disabledDate} placeholder="Дата отправления" disabled={disabled} format="DD.MM.YYYY" locale={locale} onChange={this.onChangeDate}/>
+            <Complete placeholder="Откуда" disabled={disabled} onChange={changeDepartureStationAction} />
+            <Complete placeholder="Куда" disabled={disabled} onChange={changeArriveStationAction} />
+            <DatePicker disabledDate={this.disabledDate} placeholder="Дата отправления" disabled={disabled} format="DD.MM.YYYY" locale={locale} onChange={this.onChangeDate} />
             <Button type="primary" icon="search" disabled={!canSearch || cars.isFetching} loading={isFetching} onClick={() => fetchTrainsAction(fromCode, toCode, date)} className="btn-search">Найти</Button>
           </div>
           <div className="main-content-body">
-            <TrainsView trains={trainProp} err={showErr} fetchCarsAction={fetchCarsAction} history={history}/>
+            <TrainsView trains={trainProp} err={showErr} fetchCarsAction={fetchCarsAction} history={history} />
           </div>
         </Content>
       </Layout>

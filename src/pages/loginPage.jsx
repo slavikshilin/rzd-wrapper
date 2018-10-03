@@ -5,13 +5,14 @@ import { Layout } from 'antd'
 import AlertMessage from '../components/alertMessage'
 import WrappedLogin from '../components/login'
 import { fetchLogin } from '../actions/authActions'
+import { clearLocalStorage } from '../core/utils/userInfo'  
 
 const { Content, Footer } = Layout
 
 class LoginPage extends Component {
  
   render() {
-    localStorage.clear()
+    clearLocalStorage()
     const { auth, fetchLoginAction, history } = this.props
 
     return (

@@ -1,4 +1,5 @@
-import { getLogin, getLogout, getUserInfo } from "../core/api/apiMethods"
+import { getLogin, getLogout, getUserInfo } from '../core/api/apiMethods'
+import { getToken, clearLocalStorage, setLocalStorage } from '../core/utils/userInfo'
 
 export const REQUEST_LOGIN = 'REQUEST_LOGIN'
 export const REQUEST_LOGIN_SUCCESS = 'REQUEST_LOGIN_SUCCESS'
@@ -50,8 +51,8 @@ function requestLogoutError(err) {
 export function fetchLogout(history) {
   return (dispatch) => {
 
-    const { token } = JSON.parse(localStorage.getItem('cks_token'))
-    localStorage.clear()
+    const token = getToken()
+    clearLocalStorage()
     dispatch(requestLogout())
 
     getLogout(token)
@@ -121,7 +122,7 @@ export function fetchLogin(login, password, history) {
               userInfo => { 
                   dispatch(requestLoginSuccess(userInfo.data))
                   //сохранение токена в localStorage
-                  localStorage.setItem('cks_token', JSON.stringify({ token: lToken, userInfo: userInfo.data }))
+                  setLocalStorage(lToken, userInfo.data)
                   history.push("/")
                 }
             )
