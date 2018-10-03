@@ -1,5 +1,5 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from "react"
+import PropTypes from "prop-types"
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { Button } from 'antd'
@@ -26,7 +26,7 @@ const CarGroupItemView = props => {
 
 CarGroupItemView.propTypes = {
     carProp: PropTypes.any
-};
+}
 
 
 const mapStateToProps = store => {

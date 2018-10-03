@@ -1,22 +1,19 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from 'react'
+import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import { Route, BrowserRouter, Switch, Redirect } from 'react-router-dom'
-import { Layout } from 'antd';
+import { Layout } from 'antd'
 import { store } from './store/configureStore'
-import 'antd/dist/antd.css';
-import './index.css';
-import './mobile.css';
-import LoginPage from './pages/loginPage';
-import HomePage from './pages/homePage';
-import CarsPage from './pages/carsPage';
-import registerServiceWorker from './registerServiceWorker';
+import 'antd/dist/antd.css'
+import './index.css'
+import './mobile.css'
+import LoginPage from './pages/loginPage'
+import HomePage from './pages/homePage'
+import CarsPage from './pages/carsPage'
+import registerServiceWorker from './registerServiceWorker'
+import { isLoggedIn } from './core/utils/userInfo'
 
-const { Footer } = Layout;
-
-function isLoggedIn() {
-    return localStorage.getItem('cks_token') !== null
-}
+const { Footer } = Layout
 
 ReactDOM.render(
     <Provider store={store}>
@@ -43,6 +40,6 @@ ReactDOM.render(
             </Layout>         
         </BrowserRouter>
     </Provider>,
-    document.getElementById('root'));
+    document.getElementById('root'))
 
-registerServiceWorker();
+registerServiceWorker()

@@ -1,13 +1,15 @@
 import React, { Component } from 'react'
-import moment from 'moment';
+import moment from 'moment'
 import TrainsView from './train/trainsView'
 import { Layout, Button, DatePicker } from 'antd'
-import locale from 'antd/lib/date-picker/locale/ru_RU';
-import 'moment/locale/ru';
+import locale from 'antd/lib/date-picker/locale/ru_RU'
+import 'moment/locale/ru'
 import Complete from './complete'
-import UserPopover from './userPopover'
+import AuthHeader from './authHeader'
+import { getUserInfo } from '../core/utils/userInfo'
 
-const { Content, Footer } = Layout;
+const { Content } = Layout
+
 class Home extends Component {
 
   disabledDate = (current) => {
@@ -58,22 +60,9 @@ class Home extends Component {
     const canSearch = nonEmptySearchParams && (!validateErr)
     const showErr = trainErr 
 
-    var userInfo = null
-    if (auth.userInfo) {
-      userInfo = auth.userInfo
-    } else if (localStorage.getItem('cks_token')) {
-      userInfo = JSON.parse(localStorage.getItem('cks_token')).userInfo
-    } else {
-      userInfo = {}
-    }
-
     return (
       <Layout className="main-layout">
-        <div className="auth-header">
-          <UserPopover userInfo={userInfo} />
-          &nbsp;&nbsp;
-          <span className="auth-link" type="primary" onClick={() => fetchLogoutAction(history)}>Выйти</span>
-        </div>
+        <AuthHeader userInfo={getUserInfo(auth)} history={history} fetchLogoutAction={fetchLogoutAction} />
         <div style={{ fontSize: "x-large" }}>
           Параметры поиска билетов
         </div>
@@ -88,9 +77,8 @@ class Home extends Component {
             <TrainsView trains={trainProp} err={showErr} fetchCarsAction={fetchCarsAction} history={history}/>
           </div>
         </Content>
-        <Footer></Footer>
       </Layout>
-    );
+    )
   }
 }
 

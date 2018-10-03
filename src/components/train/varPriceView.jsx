@@ -1,5 +1,5 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from "react"
+import PropTypes from "prop-types"
 
 const varPriceView = props => {
     const enabled = props.enabled
@@ -15,6 +15,6 @@ const varPriceView = props => {
 
 varPriceView.propTypes = {
     enabled: PropTypes.bool       
-};
+}
 
-export default varPriceView;  
+export default varPriceView  

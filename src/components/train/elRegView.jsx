@@ -1,5 +1,5 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from "react"
+import PropTypes from "prop-types"
 
 const ElRegView = props => {
     const enabled = props.enabled
@@ -15,6 +15,6 @@ const ElRegView = props => {
 
 ElRegView.propTypes = {
     enabled: PropTypes.bool       
-};
+}
 
-export default ElRegView;  
+export default ElRegView  

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import AlertMessage from '../alertMessage'
 import TrainItemView from './trainItemView'
 

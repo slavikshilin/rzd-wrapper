@@ -1,4 +1,4 @@
-import { getLogin, getLogout, getUserInfo } from "../core/api/apiMethods";
+import { getLogin, getLogout, getUserInfo } from "../core/api/apiMethods"
 
 export const REQUEST_LOGIN = 'REQUEST_LOGIN'
 export const REQUEST_LOGIN_SUCCESS = 'REQUEST_LOGIN_SUCCESS'
@@ -52,7 +52,7 @@ export function fetchLogout(history) {
 
     const { token } = JSON.parse(localStorage.getItem('cks_token'))
     localStorage.clear()
-    dispatch(requestLogout());
+    dispatch(requestLogout())
 
     getLogout(token)
       .then(
@@ -79,12 +79,12 @@ export function fetchLogout(history) {
         }
       )
   }
-};
+}
 
 /*eslint-disable */
 export function fetchLogin(login, password, history) {
   return (dispatch) => {
-    dispatch(requestLogin());
+    dispatch(requestLogin())
 
     getLogin(login, password)
       .then(
@@ -134,5 +134,5 @@ export function fetchLogin(login, password, history) {
         }
       )
   }
-};
+}
 /*eslint-enable */

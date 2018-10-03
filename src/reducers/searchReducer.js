@@ -12,19 +12,19 @@ export function searchReducer(state = initialState, action) {
         case CHANGE_DEPARTURE_STATION:
             {
                 let newState = { ...state, fromCode: action.payload }
-                return newState;
+                return newState
             }
 
         case CHANGE_ARRIVE_STATION:
             {
                 let newState = { ...state, toCode: action.payload }
-                return newState;
+                return newState
             }
 
             case CHANGE_DEPARTURE_DATE:
             {
                 let newState = { ...state, date: action.payload }
-                return newState;
+                return newState
             }            
 
         default:

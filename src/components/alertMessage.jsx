@@ -1,9 +1,9 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { Alert } from 'antd';
+import React from "react"
+import PropTypes from "prop-types"
+import { Alert } from 'antd'
 
 const AlertMessage = props => {
-    const err = props.err;
+    const err = props.err
     if (err) {
         return <div className="ant-form login-form-message">
             <Alert
@@ -21,6 +21,6 @@ const AlertMessage = props => {
 
 AlertMessage.propTypes = {
 	err: PropTypes.object
-};
+}
 
-export default AlertMessage;  
+export default AlertMessage  

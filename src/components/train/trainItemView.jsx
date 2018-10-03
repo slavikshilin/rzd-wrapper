@@ -1,5 +1,5 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from "react"
+import PropTypes from "prop-types"
 import CarGroupItemView from './carGroupItemView'
 import TrainItemTimeView from './trainItemTimeView'
 import ElRegView from './elRegView'
@@ -85,6 +85,6 @@ const TrainItemView = props => {
 
 TrainItemView.propTypes = {
     err: PropTypes.string
-};
+}
 
-export default TrainItemView;  
+export default TrainItemView  

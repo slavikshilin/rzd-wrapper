@@ -1,4 +1,4 @@
-import { getTrains } from "../core/api/apiMethods";
+import { getTrains } from "../core/api/apiMethods"
 
 export const REQUEST_TRAINS = 'REQUEST_TRAINS'
 export const REQUEST_TRAINS_SUCCESS = 'REQUEST_TRAINS_SUCCESS'
@@ -33,7 +33,7 @@ export  function clearTrains() {
 
 export function fetchTrains(fromCode, toCode, date, rid) {
   return (dispatch) => {
-    dispatch(requestTrainList());
+    dispatch(requestTrainList())
 
     getTrains(fromCode, toCode, date, rid)
       .then(
@@ -53,15 +53,15 @@ export function fetchTrains(fromCode, toCode, date, rid) {
           } else if ((res.data.error) || ((res.data.result) && (res.data.result.FAIL))) {
             throw new Error(res.data.error)
           } else {
-            dispatch(requestTrainListSuccess(res.data.tp));
+            dispatch(requestTrainListSuccess(res.data.tp))
           }
         }
       )
       .catch(
         err => {
-          dispatch(requestTrainListError(err));
+          dispatch(requestTrainListError(err))
         }
       )
 
   }
-};
+}

@@ -1,16 +1,10 @@
-import React from 'react';
-import { AutoComplete } from 'antd';
-import { getStations } from "../core/api/apiMethods";
+import React from 'react'
+import { AutoComplete } from 'antd'
+import { getStations } from "../core/api/apiMethods"
 
 function onSelect(value, option) {
-  console.log('onSelect', value);
+  console.log('onSelect', value)
 }
-
-/*
-function onChange(value) {
-  console.log('onChange', value) 
-}
-*/
 
 const defaultCities = [
   {
@@ -25,7 +19,7 @@ const defaultCities = [
   {
     value: 2060001, text: 'НИЖНИЙ НОВГОРОД'
   }
-];
+]
 
 class AntdComplete extends React.Component {
 
@@ -44,11 +38,11 @@ class AntdComplete extends React.Component {
       curThis.setState({
         dataSource: defaultCities,
         dataCash: defaultCities
-      });       
+      })       
     }
 
     if (value.length <= 2) {
-      return;
+      return
     }
 
     // Есть ли элемент в кеше
@@ -61,48 +55,48 @@ class AntdComplete extends React.Component {
       && (this.state.dataCash !== defaultCities)) {
         let dataSourceF = this.state.dataCash.filter(function (el) {
         return el.text.startsWith(value)
-      }).slice(0, 10);
+      }).slice(0, 10)
       curThis.setState({
         dataSource: dataSourceF
-      });
+      })
     } else {
 
       getStations(value)
         .then(function (stationResponseItems) {
           return stationResponseItems.json()
         }, function (ex) {
-          console.log("parsing failed", ex);
+          console.log("parsing failed", ex)
         })
         .then(function (stationResponseItems) {
           console.log('getStations complete')
 
           if (Array.isArray(stationResponseItems.data)) {
             var dataSourcel = stationResponseItems.data.sort(function (k, i) {
-              var t, s;
-              t = k.S + k.L * k.L;
+              var t, s
+              t = k.S + k.L * k.L
               s = i.S + i.L * i.L
               return s < t ? -1 : (s > t ? 1 : 0)
             }).map(function (el) {
-              return { value: el.c, text: el.n };
-            });
+              return { value: el.c, text: el.n }
+            })
 
             let dataSourceF = dataSourcel.filter(function (el) {
               return el.text.startsWith(value)
-            }).slice(0, 10);
+            }).slice(0, 10)
 
             curThis.setState({
               dataCash: dataSourcel,
               dataSource: dataSourceF
-            });
+            })
           } else {
             curThis.setState({
               dataSource: [],
               dataCash: []
-            });           
+            })           
           }
 
         }, function (ex) {
-          console.log("parsing failed", ex);
+          console.log("parsing failed", ex)
         })
     }
   }
@@ -121,7 +115,7 @@ class AntdComplete extends React.Component {
         placeholder={placeholder}
         disabled={disabled}
       />
-    );
+    )
   }
 }
 

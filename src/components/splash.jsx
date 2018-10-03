@@ -1,7 +1,7 @@
-import React from 'react';
-import { Spin, Layout } from 'antd';
+import React from 'react'
+import { Spin, Layout } from 'antd'
 
-const { Content, Footer } = Layout;
+const { Content, Footer } = Layout
 
 const Splash = () => {
     return (
@@ -13,7 +13,7 @@ const Splash = () => {
             </Content>
             <Footer></Footer>
         </Layout>
-    );
+    )
 }
 
 export default Splash

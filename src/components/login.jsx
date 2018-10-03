@@ -1,28 +1,28 @@
-import React from 'react';
-import { Form, Icon, Input, Button } from 'antd';
+import React from 'react'
+import { Form, Icon, Input, Button } from 'antd'
 
-const FormItem = Form.Item;
+const FormItem = Form.Item
 
 function hasErrors(fieldsError) {
-  return Object.keys(fieldsError).some(field => fieldsError[field]);
+  return Object.keys(fieldsError).some(field => fieldsError[field])
 }
 
 class Login extends React.Component {
   componentDidMount() {
     // To disabled submit button at the beginning.
-    this.props.form.validateFields();
+    this.props.form.validateFields()
   }
 
   handleSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault()
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        const { onSubmitBtn, history } = this.props;
-        onSubmitBtn(values.userName, values.password, history);
+        const { onSubmitBtn, history } = this.props
+        onSubmitBtn(values.userName, values.password, history)
 
-        console.log('Received values of form: ', values);
+        console.log('Received values of form: ', values)
       }
-    });
+    })
   }
 
   handleConfirmLogin = (rule, value, callback) => {
@@ -48,8 +48,8 @@ class Login extends React.Component {
     const { isFetching } = this.props
 
     // Only show error after a field is touched.
-    const userNameError = isFieldTouched('userName') && getFieldError('userName');
-    const passwordError = isFieldTouched('password') && getFieldError('password');
+    const userNameError = isFieldTouched('userName') && getFieldError('userName')
+    const passwordError = isFieldTouched('password') && getFieldError('password')
     return (
       <Form className="login-form" onSubmit={this.handleSubmit}>
         <FormItem
@@ -88,10 +88,10 @@ class Login extends React.Component {
           </Button>
         </FormItem>
       </Form>
-    );
+    )
   }
 }
 
-const WrappedLogin = Form.create()(Login);
+const WrappedLogin = Form.create()(Login)
 
 export default WrappedLogin

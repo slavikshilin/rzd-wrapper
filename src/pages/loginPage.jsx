@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-import { Layout } from 'antd';
+import { Layout } from 'antd'
 import AlertMessage from '../components/alertMessage'
 import WrappedLogin from '../components/login'
 import { fetchLogin } from '../actions/authActions'
 
-const { Content, Footer } = Layout;
+const { Content, Footer } = Layout
 
 class LoginPage extends Component {
  

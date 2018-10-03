@@ -1,5 +1,5 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from "react"
+import PropTypes from "prop-types"
 
 const TrainItemTimeView = props => {
     const { localDate, localTime, timeDeltaString, date, time } = props
@@ -41,6 +41,6 @@ TrainItemTimeView.propTypes = {
     timeDeltaString: PropTypes.string,
     date: PropTypes.string,
     time: PropTypes.string,        
-};
+}
 
-export default TrainItemTimeView;  
+export default TrainItemTimeView  

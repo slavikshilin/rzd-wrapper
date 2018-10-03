@@ -1,10 +1,10 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from "react"
+import PropTypes from "prop-types"
 import { Popover } from 'antd'
 import Mailto from './react-mailto'
 
 const UserPopover = props => {
-    const userInfo = props.userInfo;
+    const userInfo = props.userInfo
 
     const content = (
         <div>
@@ -32,6 +32,6 @@ const UserPopover = props => {
 
 UserPopover.propTypes = {
     userInfo: PropTypes.any
-};
+}
 
-export default UserPopover;  
+export default UserPopover  

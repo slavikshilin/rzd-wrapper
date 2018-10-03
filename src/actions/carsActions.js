@@ -37,7 +37,7 @@ export function clearCars() {
 
 export function fetchCars(fromCode, toCode, date, tnum, id, history, rid) {
   return (dispatch) => {
-    dispatch(requestCarList(tnum, id));
+    dispatch(requestCarList(tnum, id))
 
     getCars(fromCode, toCode, date, tnum, rid)
       .then(
@@ -69,4 +69,4 @@ export function fetchCars(fromCode, toCode, date, tnum, id, history, rid) {
       )
 
   }
-};
+}
