@@ -30,9 +30,10 @@
 }
 
 .main-layout {
-  min-width: 800px;
-  max-width: 1280px;
+  min-width: 1200px;
+  max-width: 1200px;
   padding: 20px;  
+  margin: 0 auto;
 }
 
 .auth-header {
@@ -70,16 +71,19 @@
   max-height: 350px;
 }
 
-.main-control > * {
-  margin: 5px;  
+.main-control {
+  display: -webkit-flex;
+  -webkit-justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
 .btn-search {
-  width: 320px;  
+  width: 230px;  
 }
 
 .main-content-body {
-  padding: 9px;  
+  padding-top: 20px;  
 }
 
 .btn-car-group {

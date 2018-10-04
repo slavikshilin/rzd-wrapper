@@ -5,6 +5,7 @@ import { fetchLogout } from '../actions/authActions'
 import { clearTrains } from '../actions/trainsActions'
 import { fetchCars, clearCars } from '../actions/carsActions'
 import CarsView from '../components/car/carsView'
+import Splash from '../components/splash'
 
 class CarsPage extends Component {
 
@@ -23,6 +24,10 @@ class CarsPage extends Component {
         if (!cars.carsInfo) {
             history.push("/")
             return null
+        } else if (auth.isFetching) {
+            return (
+                <Splash />
+            )            
         } else {
             return (
                 <CarsView
