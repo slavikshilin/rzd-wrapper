@@ -72,7 +72,7 @@ class Home extends Component {
         return (
             <Layout className="main-layout">
                 <AuthHeader userInfo={getUserInfo(auth)} history={history} fetchLogoutAction={fetchLogoutAction} />
-                <div style={{ fontSize: "x-large" }}>
+                <div className="main-caption">
                     Параметры поиска билетов
                 </div>
                 <Content>

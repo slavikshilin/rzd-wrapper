@@ -71,6 +71,11 @@
   max-height: 350px;
 }
 
+.main-caption {
+  font-size: x-large;
+  padding: 10px;  
+}
+
 .main-control {
   display: -webkit-flex;
   -webkit-justify-content: space-between;
@@ -83,7 +88,7 @@
 }
 
 .main-content-body {
-  padding-top: 20px;  
+  padding-top: 10px;  
 }
 
 .btn-car-group {
