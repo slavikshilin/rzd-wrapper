@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { fetchLogout } from '../actions/authActions'
+import { clearSearch } from '../actions/searchActions'
 import { clearTrains } from '../actions/trainsActions'
 import { fetchCars, clearCars } from '../actions/carsActions'
 import CarsView from '../components/car/carsView'
@@ -21,13 +22,13 @@ class CarsPage extends Component {
             fetchCarsAction
         } = this.props
 
-        if (!cars.carsInfo) {
-            history.push("/")
-            return null
-        } else if (auth.isFetching) {
+        if (auth.isFetching) {
             return (
                 <Splash />
-            )            
+            )           
+        } else if (!cars.carsInfo) {
+            history.push("/")
+            return null
         } else {
             return (
                 <CarsView
@@ -56,6 +57,7 @@ const mapDispatchToProps = dispatch => {
     return {
         fetchLogoutAction: (history) => {
             dispatch(fetchLogout(history))
+            dispatch(clearSearch())
             dispatch(clearTrains())
             dispatch(clearCars())
         },
