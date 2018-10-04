@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom'
 import { fetchLogout } from '../actions/authActions'
 import { fetchTrains, clearTrains } from '../actions/trainsActions'
 import { fetchCars, clearCars } from '../actions/carsActions'
-import { changeDepartureStation, changeArriveStation, changeDepartureDate } from '../actions/searchActions'
+import { changeDepartureStation, changeArriveStation, changeDepartureDate, clearSearch } from '../actions/searchActions'
 import Home from '../components/home'
 import Splash from '../components/splash'
 
@@ -22,6 +22,7 @@ class HomePage extends Component {
             fetchTrainsAction,
             fetchCarsAction,
             clearCarsAction,
+            clearSearchAction,
             changeDepartureStationAction,
             changeArriveStationAction,
             changeDepartureDateAction
@@ -45,7 +46,8 @@ class HomePage extends Component {
                     fetchLogoutAction={fetchLogoutAction}
                     fetchTrainsAction={fetchTrainsAction}
                     fetchCarsAction={fetchCarsAction}
-                    clearCarsAction={clearCarsAction} />
+                    clearCarsAction={clearCarsAction}
+                    clearSearchAction={clearSearchAction} />
             )
         }
     }
@@ -67,12 +69,13 @@ const mapDispatchToProps = dispatch => {
             dispatch(clearTrains())
             dispatch(clearCars())
         },
-        changeDepartureStationAction: (code) => dispatch(changeDepartureStation(code)),
-        changeArriveStationAction: (code) => dispatch(changeArriveStation(code)),
+        changeDepartureStationAction: (station) => dispatch(changeDepartureStation(station)),
+        changeArriveStationAction: (station) => dispatch(changeArriveStation(station)),
         changeDepartureDateAction: (date) => dispatch(changeDepartureDate(date)),
         fetchTrainsAction: (fromCode, toCode, date) => dispatch(fetchTrains(fromCode, toCode, date)),
         fetchCarsAction: (fromCode, toCode, date, tnum, history) => dispatch(fetchCars(fromCode, toCode, date, tnum, history)),
         clearCarsAction: () => dispatch(clearCars()),
+        clearSearchAction: () => dispatch(clearSearch()), 
     }
 }
 

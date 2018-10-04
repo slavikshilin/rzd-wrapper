@@ -53,9 +53,14 @@ class Home extends Component {
         const isFetching = trains.isFetching
         const disabled = trains.isFetching || cars.isFetching
 
-        const fromCode = (search.fromCode) ? search.fromCode : null
-        const toCode = (search.fromCode) ? search.toCode : null
+        const fromCode = (search.fromStation && search.fromStation.value) ? search.fromStation.value.toString() : null
+        const toCode = (search.toStation && search.toStation.value) ? search.toStation.value.toString() : null
         const date = (search.date) ? search.date : null
+        
+        const defaultFromCodeValue = (fromCode) ? search.fromStation.text : null
+        const defaultToCodeValue = (toCode) ? search.toStation.text : null       
+        const defaultDateValue = (date) ? moment(date, 'DD.MM.YYYY') : null       
+
         const nonEmptySearchParams = fromCode && toCode && date
         const validateErr = nonEmptySearchParams && this.validateSearchParams(fromCode, toCode, date)
         const canSearch = nonEmptySearchParams && (!validateErr)
@@ -77,9 +82,9 @@ class Home extends Component {
                 </div>
                 <Content>
                     <div className="main-control">
-                        <Complete placeholder="Откуда" disabled={disabled} onChange={changeDepartureStationAction} />
-                        <Complete placeholder="Куда" disabled={disabled} onChange={changeArriveStationAction} />
-                        <DatePicker disabledDate={this.disabledDate} placeholder="Дата отправления" disabled={disabled} format="DD.MM.YYYY" locale={locale} onChange={this.onChangeDate} />
+                        <Complete defaultValue={defaultFromCodeValue} placeholder="Откуда" disabled={disabled} onChange={changeDepartureStationAction} />
+                        <Complete defaultValue={defaultToCodeValue} placeholder="Куда" disabled={disabled} onChange={changeArriveStationAction} />
+                        <DatePicker defaultValue={defaultDateValue} disabledDate={this.disabledDate} placeholder="Дата отправления" disabled={disabled} format="DD.MM.YYYY" locale={locale} onChange={this.onChangeDate} />
                         <Button type="primary" icon="search" disabled={!canSearch || cars.isFetching} loading={isFetching} onClick={
                             () => { 
                                 clearCarsAction()

@@ -44,11 +44,11 @@ class CarsView extends Component {
 									<div className="trl-train-datetime-item clearfix">
 										<div className="row">
 											<div className="col-lg-5 col-md-5 col-sm-5 col-xs-5">
-												<div>{train.route0}</div>
+												<div>{train.station0}</div>
 											</div>
 											<div className="col-lg-1 col-md-1 col-sm-1 col-xs-1 trl-train-datetime-arrow trl-train-datetime-item" style={{ padding: 0 }}>→</div>
 											<div className="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-												<div>{train.route1}</div>
+												<div>{train.station1}</div>
 											</div>
 										</div>
 

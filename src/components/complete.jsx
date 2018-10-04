@@ -2,10 +2,6 @@ import React from 'react'
 import { AutoComplete } from 'antd'
 import { getStations } from "../core/api/apiMethods"
 
-function onSelect(value, option) {
-    console.log('onSelect', value)
-}
-
 const defaultCities = [
     {
         value: 2000000, text: 'МОСКВА'
@@ -27,6 +23,15 @@ class AntdComplete extends React.Component {
         dataSource: defaultCities,
         dataCash: defaultCities
     }
+
+    handleChange = (value) => {
+        const dataSource = this.state.dataSource
+        let searchItem = dataSource.find(function (el) {
+            return el.value.toString() === value
+        })
+        searchItem = (searchItem) ? searchItem : null 
+        this.props.onChange(searchItem)
+    }    
 
     handleSearch = (value) => {
 
@@ -102,15 +107,15 @@ class AntdComplete extends React.Component {
     }
 
     render() {
-        const { placeholder, disabled, onChange } = this.props
+        const { placeholder, disabled, defaultValue } = this.props
         const { dataSource } = this.state
 
         return (
             <AutoComplete
                 className="ant-select-dropdown-menu-all"
                 dataSource={dataSource}
-                onSelect={onSelect}
-                onChange={onChange}
+                defaultValue={defaultValue}
+                onChange={this.handleChange}
                 onSearch={this.handleSearch}
                 placeholder={placeholder}
                 disabled={disabled}

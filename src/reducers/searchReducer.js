@@ -1,8 +1,8 @@
-import { CHANGE_DEPARTURE_STATION, CHANGE_ARRIVE_STATION, CHANGE_DEPARTURE_DATE } from '../actions/searchActions'
+import { CHANGE_DEPARTURE_STATION, CHANGE_ARRIVE_STATION, CHANGE_DEPARTURE_DATE, CLEAR_SEARCH } from '../actions/searchActions'
 
 const initialState = {
-    fromCode: null,
-    toCode: null,
+    fromStation: null,
+    toStation: null,
     date: null
 }
 
@@ -11,13 +11,13 @@ export function searchReducer(state = initialState, action) {
 
         case CHANGE_DEPARTURE_STATION:
             {
-                let newState = { ...state, fromCode: action.payload }
+                let newState = { ...state, fromStation: action.payload }
                 return newState
             }
 
         case CHANGE_ARRIVE_STATION:
             {
-                let newState = { ...state, toCode: action.payload }
+                let newState = { ...state, toStation: action.payload }
                 return newState
             }
 
@@ -25,7 +25,13 @@ export function searchReducer(state = initialState, action) {
             {
                 let newState = { ...state, date: action.payload }
                 return newState
-            }            
+            }       
+            
+            case CLEAR_SEARCH:
+            {
+                let newState = { ...initialState }
+                return newState
+            }              
 
         default:
             return state
