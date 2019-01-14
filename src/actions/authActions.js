@@ -84,56 +84,31 @@ export function fetchLogout(history) {
 
 /*eslint-disable */
 export function fetchLogin(login, password, history) {
-    return (dispatch) => {
+    return async (dispatch) => {
         dispatch(requestLogin())
 
-        getLogin(login, password)
-            .then(
-                function (res) {
+        try {
+            let resPromise = await getLogin(login, password);
+            let res = await resPromise.json();
 
-                    if (res.ok) {
-                        return res.json()
-                    }
+            if (!res.authFlag) {
+                throw new Error(`Неверный логин или пароль`)
+            }
 
-                    throw new Error(`Network response was not ok. ${res.status} ${res.statusText}`)
-                }
-            )
-            .then(
+            var lToken = res.token
 
-                function (res) {
+            let userInfoPromise = await getUserInfo(lToken);
+            let userInfo = await userInfoPromise.json();
+            dispatch(requestLoginSuccess(userInfo.data))
+            //сохранение токена в localStorage
+            setLocalStorage(lToken, userInfo.data)
+            history.push("/")
 
-                    if (!res.authFlag) {
-                        throw new Error(`Неверный логин или пароль`)
-                    }
+        } catch(err) {
+            localStorage.clear()
+            dispatch(requestLoginError(err))
+        }
 
-                    var lToken = res.token
-
-                    getUserInfo(lToken)
-                        .then(
-                            function (res) {
-
-                                if (res.ok) {
-                                    return res.json()
-                                }
-                                throw new Error(`Network response was not ok. ${res.status} ${res.statusText}`)
-                            }
-                        )
-                        .then(
-                            userInfo => {
-                                dispatch(requestLoginSuccess(userInfo.data))
-                                //сохранение токена в localStorage
-                                setLocalStorage(lToken, userInfo.data)
-                                history.push("/")
-                            }
-                        )
-                }
-            )
-            .catch(
-                err => {
-                    localStorage.clear()
-                    dispatch(requestLoginError(err))
-                }
-            )
     }
 }
 /*eslint-enable */

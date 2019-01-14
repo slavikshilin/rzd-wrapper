@@ -37,38 +37,28 @@ export function clearCars() {
 }
 
 export function fetchCars(fromCode, toCode, date, tnum, id, carType, history, rid) {
-    return (dispatch) => {
+    return async (dispatch) => {
         dispatch(requestCarList(tnum, id, carType))
 
-        getCars(fromCode, toCode, date, tnum, rid)
-            .then(
-                function (res) {
-                    if (res.ok) {
-                        return res.json()
-                    }
-                    throw new Error(`Network response was not ok. ${res.status} ${res.statusText}`)
-                }
-            )
-            .then(
-                function (res) {
-                    if (!res.data) {
-                        throw new Error(`Не удалось получить список вагонов`)
-                    } else if (res.data.result === 'RID') {
-                        dispatch(fetchCars(fromCode, toCode, date, tnum, id, carType, history, res.data.RID))
-                    } else if (res.data.error) {
-                        throw new Error(res.data.error)
-                    } else if ((res.data.lst) && (res.data.lst.length > 0) && (res.data.lst[0].result === 'FAIL')) {
-                        throw new Error(res.data.lst[0].error)
-                    } else {
-                        dispatch(requestCarListSuccess(res.data.lst))
-                        history.push("/cars")
-                    }
-                }
-            )
-            .catch(
-                err => {
-                    dispatch(requestCarListError(err))
-                }
-            )
+        try {
+            let resPromise = await getCars(fromCode, toCode, date, tnum, rid);
+            let res = await resPromise.json();
+            if (!res.data) {
+                throw new Error(`Не удалось получить список вагонов`)
+            } else if (res.data.result === 'RID') {
+                dispatch(fetchCars(fromCode, toCode, date, tnum, id, carType, history, res.data.RID))
+            } else if (res.data.error) {
+                throw new Error(res.data.error)
+            } else if ((res.data.lst) && (res.data.lst.length > 0) && (res.data.lst[0].result === 'FAIL')) {
+                throw new Error(res.data.lst[0].error)
+            } else {
+                dispatch(requestCarListSuccess(res.data.lst))
+                history.push("/cars")
+            }           
+            
+        } catch(err) {
+            dispatch(requestCarListError(err))
+        }
+
     }
 }
